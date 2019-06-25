@@ -1,0 +1,11 @@
+Package: FAOSDGdata
+Type: Package
+Title: Analyze SDG indicators produced by FAO
+Version: 0.1.0
+Author: Michael Rahija
+Maintainer: Michael Rahija <michael.rhaija@gmail.com>
+Description: 
+    This package contains all of the published data for the SDG indicators under FAO's custodianship.
+License: MIT License
+Encoding: UTF-8
+LazyData: true

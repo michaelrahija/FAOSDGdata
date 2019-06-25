@@ -1,0 +1,18 @@
+---
+title: "README"
+author: "Michael Rahija"
+date: "June 25, 2019"
+output: html_document
+---
+
+This package provides a function to download the latest published SDG datasets from FAO. 
+```{r setup, include=FALSE}
+library(devtools)
+library(tidyverse)
+library(readxl)
+
+source("R/getData.R")
+df <- getData("2.1.1")
+head(df)
+
+```
