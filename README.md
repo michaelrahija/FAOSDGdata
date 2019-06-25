@@ -1,9 +1,4 @@
----
-title: "FAOSDGData"
-author: "Michael Rahija"
-date: "June 25, 2019"
-output: html_document
----
+# FAOSDG Data
 
 This package provides functions to download and interact withthe latest published SDG datasets from FAO. 
 ```{r, messages = FALSE}
