@@ -21,9 +21,15 @@ sdgs <- c("2.1.1",
           "15.4.2")
           #"15.6.1") #18
 
+y <- getData("2.1.1")
+
+
+
 x <- lapply(sdgs, getData)
 
-names(x) <- sdgs
+
+
+names(x) <- gsub("\\.", "_",sdgs)
 sapply(x,colnames)
 
-sapply(x, str)
+sapply(x, head)
