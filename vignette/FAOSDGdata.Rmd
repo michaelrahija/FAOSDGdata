@@ -79,13 +79,24 @@ head(sdgsdf)
 ```
 
 
-### Get all dataset, clean them, merge into single datafarme
+### Tabulate to check for consistent naming focusing on areacodes and names
 ```{r }
-#look at vars, remove value to skip tabulation
-for.table <- select(sdgsdf,-value)
-t <- sapply(for.table, table)
+areas <- sdgsdf %>% 
+              group_by(areacode, areaname) %>% 
+              summarize(n = n()) %>% 
+              as.data.frame()
 
-t
+areas$areaname <- substr(areas$areaname, start = 1, stop = 25)
 
+areas
+
+```
+
+### Tabulate to check for units
+```{r }
+
+sdgsdf %>% 
+      group_by(unit) %>% 
+      summarize(n = n())
 
 ```
