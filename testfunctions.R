@@ -16,6 +16,7 @@ sdgs <- c("2.1.1",
           "6.4.2",
           "14.4.1",
           "14.6.1",
+          "14.7.1",
           "14.b.1",
           "15.1.1",
           "15.2.1",
@@ -23,17 +24,28 @@ sdgs <- c("2.1.1",
           #"15.6.1") #18
 
 
-y <- lapply(sdgs, function(x) getData(x, source = "web"))
+raw.data <- lapply(sdgs, function(x) getData(x, source = "web"))
+clean <- lapply(raw.data, cleanData)
+clean.df <- do.call("rbind", clean)
 
-x <- y
 
+#look at vars, remove value to skip tabulation
+test <- select(clean.df,-value)
+t <- sapply(test, table)
 
 #harmonize column names
-lapply(x, colnames)
+names(y) <- lapply(y, function(x) unique(x$Indicator))
+
+y <- lapply(y, cleanData)
+
+
+df <- do.call("bind_rows",y)
 
 
 
-names(x) <- lapply(x, function(x) unique(x$Indicator))
+cols <- colnames(y$'2.1.1')
+
+y <- lapply(y, select(cols))
 
 #need to edit 2.5.1 name, a = plants, b = animals
 temp <- x[names(x) == '2.5.1']

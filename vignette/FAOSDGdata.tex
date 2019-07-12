@@ -1,0 +1,1329 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={SDG Combining report},
+            pdfauthor={Michael Rahija},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{SDG Combining report}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Michael Rahija}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{July 12, 2019}
+
+
+\begin{document}
+\maketitle
+
+\section{Report to combine datasets}\label{report-to-combine-datasets}
+
+\subsection{Load package}\label{load-package}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#set up}
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =}\NormalTok{ T, }\DataTypeTok{warning=}\NormalTok{F, }\DataTypeTok{message =}\NormalTok{ F)}
+\KeywordTok{library}\NormalTok{(FAOSDGdata)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\subsubsection{Download single dataset through
+API}\label{download-single-dataset-through-api}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sdg <-}\StringTok{ }\KeywordTok{getData}\NormalTok{(}\StringTok{"2.1.1"}\NormalTok{, }
+               \DataTypeTok{source =} \StringTok{"web"}\NormalTok{)}
+
+\KeywordTok{head}\NormalTok{(sdg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 17
+##   GeoAreaCode GeoAreaName RefAreaType_Int~ Indicator SeriesID SeriesCode
+##         <dbl> <chr>       <chr>            <chr>        <dbl> <chr>     
+## 1           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## 2           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## 3           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## 4           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## 5           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## 6           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## # ... with 11 more variables: SeriesDescription <chr>, TimePeriod <dbl>,
+## #   Value <chr>, Time_Detail <chr>, Nature <chr>, Units <chr>, `Reporting
+## #   Type` <lgl>, Source <chr>, FootNote <chr>, Disaggregation <lgl>,
+## #   version <chr>
+\end{verbatim}
+
+\subsubsection{Download all SDGs and save to
+list}\label{download-all-sdgs-and-save-to-list}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sdgs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"2.1.1"}\NormalTok{,}
+          \StringTok{"2.1.2"}\NormalTok{,}
+          \StringTok{"2.3.1"}\NormalTok{,}
+          \StringTok{"2.3.2"}\NormalTok{,}
+          \StringTok{"2.5.1_Plants"}\NormalTok{,}
+          \StringTok{"2.5.1_Animals"}\NormalTok{,}
+          \StringTok{"2.5.2"}\NormalTok{,}
+          \StringTok{"2.a.1"}\NormalTok{,}
+          \StringTok{"2.c.1"}\NormalTok{,}
+          \StringTok{"6.4.1"}\NormalTok{,}
+          \StringTok{"6.4.2"}\NormalTok{,}
+          \StringTok{"14.4.1"}\NormalTok{,}
+          \StringTok{"14.6.1"}\NormalTok{,}
+          \StringTok{"14.7.1"}\NormalTok{,}
+          \StringTok{"14.b.1"}\NormalTok{,}
+          \StringTok{"15.1.1"}\NormalTok{,}
+          \StringTok{"15.2.1"}\NormalTok{,}
+          \StringTok{"15.4.2"}\NormalTok{)}
+
+\NormalTok{allSdgs <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(sdgs, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{getData}\NormalTok{(x, }\DataTypeTok{source =} \StringTok{"web"}\NormalTok{))}
+
+\KeywordTok{head}\NormalTok{(allSdgs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## # A tibble: 5,045 x 17
+##    GeoAreaCode GeoAreaName RefAreaType_Int~ Indicator SeriesID SeriesCode
+##          <dbl> <chr>       <chr>            <chr>        <dbl> <chr>     
+##  1           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  2           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  3           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  4           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  5           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  6           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  7           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  8           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+##  9           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## 10           1 World       1.0-Global       2.1.1         1857 SN_ITK_DE~
+## # ... with 5,035 more rows, and 11 more variables:
+## #   SeriesDescription <chr>, TimePeriod <dbl>, Value <chr>,
+## #   Time_Detail <chr>, Nature <chr>, Units <chr>, `Reporting Type` <lgl>,
+## #   Source <chr>, FootNote <chr>, Disaggregation <lgl>, version <chr>
+## 
+## [[2]]
+## # A tibble: 988 x 19
+##    GeoAreaCode GeoAreaName RefAreaType_Int~ Indicator SeriesID SeriesCode
+##          <dbl> <chr>       <chr>            <chr>        <dbl> <chr>     
+##  1           1 World       1.0-Global       2.1.2         2831 AG_PRD_FI~
+##  2           1 World       1.0-Global       2.1.2         2831 AG_PRD_FI~
+##  3           1 World       1.0-Global       2.1.2         2831 AG_PRD_FI~
+##  4           1 World       1.0-Global       2.1.2         2831 AG_PRD_FI~
+##  5           1 World       1.0-Global       2.1.2         2831 AG_PRD_FI~
+##  6           1 World       1.0-Global       2.1.2         2831 AG_PRD_FI~
+##  7           2 Africa      2.4-Regional (M~ 2.1.2         2831 AG_PRD_FI~
+##  8           2 Africa      2.4-Regional (M~ 2.1.2         2831 AG_PRD_FI~
+##  9           2 Africa      2.4-Regional (M~ 2.1.2         2831 AG_PRD_FI~
+## 10           2 Africa      2.4-Regional (M~ 2.1.2         2831 AG_PRD_FI~
+## # ... with 978 more rows, and 13 more variables: SeriesDescription <chr>,
+## #   TimePeriod <dbl>, Value <chr>, Time_Detail <dbl>, Nature <chr>,
+## #   Units <chr>, `Reporting Type` <lgl>, Source <chr>, FootNote <chr>,
+## #   Disaggregation <lgl>, Age.Group <chr>, Bounds <chr>, version <chr>
+## 
+## [[3]]
+## # A tibble: 2,223 x 17
+##    GeoAreaCode GeoAreaName RefAreaType_Int~ Indicator SeriesID SeriesCode
+##          <dbl> <chr>       <chr>            <chr>     <lgl>    <lgl>     
+##  1           4 Afghanistan 3.0-Country      2.3.1     NA       NA        
+##  2         248 "\xc5land ~ 3.0-Country      2.3.1     NA       NA        
+##  3           8 Albania     3.0-Country      2.3.1     NA       NA        
+##  4          12 Algeria     3.0-Country      2.3.1     NA       NA        
+##  5          16 American S~ 3.0-Country      2.3.1     NA       NA        
+##  6          20 Andorra     3.0-Country      2.3.1     NA       NA        
+##  7          24 Angola      3.0-Country      2.3.1     NA       NA        
+##  8         660 Anguilla    3.0-Country      2.3.1     NA       NA        
+##  9          28 Antigua an~ 3.0-Country      2.3.1     NA       NA        
+## 10          32 Argentina   3.0-Country      2.3.1     NA       NA        
+## # ... with 2,213 more rows, and 11 more variables:
+## #   SeriesDescription <chr>, TimePeriod <dbl>, Value <chr>,
+## #   Time_Detail <dbl>, Nature <chr>, Units <chr>, `Reporting Type` <lgl>,
+## #   Source <chr>, FootNote <lgl>, Disaggregation <lgl>, version <chr>
+## 
+## [[4]]
+## # A tibble: 3,211 x 17
+##    GeoAreaCode GeoAreaName RefAreaType_Int~ Indicator SeriesID SeriesCode
+##          <dbl> <chr>       <chr>            <chr>     <lgl>    <lgl>     
+##  1           4 Afghanistan 3.0-Country      2.3.2     NA       NA        
+##  2         248 Åland Isla~ 3.0-Country      2.3.2     NA       NA        
+##  3           8 Albania     3.0-Country      2.3.2     NA       NA        
+##  4          12 Algeria     3.0-Country      2.3.2     NA       NA        
+##  5          16 American S~ 3.0-Country      2.3.2     NA       NA        
+##  6          20 Andorra     3.0-Country      2.3.2     NA       NA        
+##  7          24 Angola      3.0-Country      2.3.2     NA       NA        
+##  8         660 Anguilla    3.0-Country      2.3.2     NA       NA        
+##  9          28 Antigua an~ 3.0-Country      2.3.2     NA       NA        
+## 10          32 Argentina   3.0-Country      2.3.2     NA       NA        
+## # ... with 3,201 more rows, and 11 more variables:
+## #   SeriesDescription <chr>, TimePeriod <dbl>, Value <chr>,
+## #   Time_Detail <dbl>, Nature <chr>, Units <chr>, `Reporting Type` <lgl>,
+## #   Source <chr>, FootNote <lgl>, Disaggregation <lgl>, version <chr>
+## 
+## [[5]]
+## # A tibble: 2,664 x 14
+##    SeriesCode SeriesDescripti~ Indicator GeoAreaCode RefAreaType_Int~
+##    <chr>      <chr>            <chr>           <dbl> <chr>           
+##  1 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  2 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  3 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  4 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  5 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  6 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  7 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  8 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+##  9 ER_GRF_PL~ Plant genetic r~ 2.5.1               1 1.0-Global      
+## 10 ER_GRF_PL~ Plant genetic r~ 2.5.1               2 2.4-Regional (M~
+## # ... with 2,654 more rows, and 9 more variables: GeoAreaName <chr>,
+## #   TimePeriod <dbl>, Value <dbl>, Units <chr>, Nature <chr>,
+## #   Disaggregation <lgl>, Footnotes <chr>, Source <chr>, version <chr>
+## 
+## [[6]]
+## # A tibble: 580 x 17
+##    GeoAreaCode GeoAreaName RefAreaType_Int~ Indicator SeriesID SeriesCode
+##          <dbl> <chr>       <chr>            <chr>        <dbl> <chr>     
+##  1           1 World       1.0-Global       2.5.1         1766 ER_GRF_AN~
+##  2         513 Northern A~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  3          21 Northern A~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  4         150 Europe (M4~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  5         419 Latin Amer~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  6          62 Central As~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  7         143 Central As~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  8          34 Southern A~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+##  9         753 Eastern As~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+## 10          30 Eastern As~ 2.1-Regional (S~ 2.5.1         1766 ER_GRF_AN~
+## # ... with 570 more rows, and 11 more variables: SeriesDescription <chr>,
+## #   TimePeriod <dbl>, Value <chr>, Time_Detail <lgl>, Nature <chr>,
+## #   Units <chr>, `Reporting Type` <lgl>, Source <chr>, FootNote <chr>,
+## #   Disaggregation <lgl>, version <chr>
+\end{verbatim}
+
+\subsubsection{Clean single dataset to have easier column names,
+consistent classes, and only keep columns needed for
+analysis.}\label{clean-single-dataset-to-have-easier-column-names-consistent-classes-and-only-keep-columns-needed-for-analysis.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cleandf <-}\StringTok{ }\KeywordTok{getData}\NormalTok{(}\StringTok{"2.1.2"}\NormalTok{, }
+                  \DataTypeTok{source =} \StringTok{"web"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{           }\KeywordTok{cleanData}\NormalTok{()}
+
+\KeywordTok{head}\NormalTok{(cleandf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 9
+##   areacode areaname areatype indicator indicatorDescri~ timeperiod value
+##   <chr>    <chr>    <chr>    <chr>     <chr>            <chr>      <dbl>
+## 1 1        World    1.0-Glo~ 2.1.2     Prevalence of s~ 2015         8.7
+## 2 1        World    1.0-Glo~ 2.1.2     Prevalence of s~ 2015         8.4
+## 3 1        World    1.0-Glo~ 2.1.2     Prevalence of s~ 2015         9  
+## 4 1        World    1.0-Glo~ 2.1.2     Prevalence of s~ 2016         9.2
+## 5 1        World    1.0-Glo~ 2.1.2     Prevalence of s~ 2016         8.9
+## 6 1        World    1.0-Glo~ 2.1.2     Prevalence of s~ 2016         9.4
+## # ... with 2 more variables: unit <chr>, version <chr>
+\end{verbatim}
+
+\subsubsection{Get all dataset, clean them, merge into single
+datafarme}\label{get-all-dataset-clean-them-merge-into-single-datafarme}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cleanall <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(allSdgs, cleanData)}
+
+\NormalTok{sdgsdf <-}\StringTok{ }\KeywordTok{do.call}\NormalTok{(}\StringTok{"rbind"}\NormalTok{, cleanall)}
+
+\KeywordTok{nrow}\NormalTok{(sdgsdf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 44320
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(sdgsdf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 9
+##   areacode areaname areatype indicator indicatorDescri~ timeperiod value
+##   <chr>    <chr>    <chr>    <chr>     <chr>            <chr>      <dbl>
+## 1 1        World    1.0-Glo~ 2.1.1     Prevalence of u~ 2000        14.8
+## 2 1        World    1.0-Glo~ 2.1.1     Prevalence of u~ 2001        14.9
+## 3 1        World    1.0-Glo~ 2.1.1     Prevalence of u~ 2002        15.1
+## 4 1        World    1.0-Glo~ 2.1.1     Prevalence of u~ 2003        15.1
+## 5 1        World    1.0-Glo~ 2.1.1     Prevalence of u~ 2004        14.8
+## 6 1        World    1.0-Glo~ 2.1.1     Prevalence of u~ 2005        14.5
+## # ... with 2 more variables: unit <chr>, version <chr>
+\end{verbatim}
+
+\subsubsection{Get all dataset, clean them, merge into single
+datafarme}\label{get-all-dataset-clean-them-merge-into-single-datafarme-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#look at vars, remove value to skip tabulation}
+\NormalTok{for.table <-}\StringTok{ }\KeywordTok{select}\NormalTok{(sdgsdf,}\OperatorTok{-}\NormalTok{value)}
+\NormalTok{t <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(for.table, table)}
+
+\NormalTok{t}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $areacode
+## 
+##   1 100 104 108  11 112 116  12 120 124 127  13 132 135 136  14 140 142 
+## 146 156 160 156 119 156 160 156 160 156  53 119 155 118 155 119 156 100 
+## 143 144 145 148  15 150 151 152 154 155 156  16 162 166  17 170 174 175 
+## 127 156 127 156 127 126 119 160 119 119 156 155 155 155 119 156 155 155 
+## 178  18 180 184 188  19 191 192 196 199   2  20 202 203 204 208  21 212 
+## 156 114 156 155 160  78 160 155 156 122  78 155 127 160 156 160 127 155 
+## 214 218 222 223 226 231 232 233 234 238 239  24 242 246 248 250 254 258 
+## 156 160 160  53 155 156 155 160 155 155 155 156 155 160 155 160 155 155 
+## 260 262 266 268 270 275 276  28 288  29 292 296  30 300 304 308  31 312 
+## 155 155 156 160 160 160 160 155 160 119 155 155 127 160 155 155 156 155 
+## 316  32 320 324 328 332 334 336  34 340 344 348  35 352 356  36 360 364 
+## 155 160 156 160 155 160 155 155 127 155 156 157 127 160 156 160 156 156 
+## 368 372 376 380 384 388  39 392 398   4  40 400 404 408 410 414 417 418 
+## 156 160 156 160 156 156 119 160 160 160 160 160 160 155 160 156 160 155 
+## 419 422 426 428 430 432 434 438  44 440 442 446 450 454 458 462 466 470 
+## 127 160 160 160 160 127 156 155 155 160 160 155 156 160 156 155 156 156 
+## 474 478  48 480 484 485 492 496 498 499   5  50 500 504 508  51 512 513 
+## 155 156 156 160 160 118 155 160 160 160 119 156 155 156 156 160 155 127 
+## 514 515 516 518  52 520 524 528  53 531 533 534 535  54 540 543 548 554 
+## 118  96 160 118 155 155 160 156 127 155 155 155 155 127 155 149 155 160 
+## 558  56 562 566  57 570 574 578 580 581 583 584 585 586 591 598  60 600 
+## 156 156 160 160 118 155 155 160 155 155 155 155 155 156 156 155 155 156 
+## 604 608  61 612 616  62 620 624 626 630 634 638  64 642 643 646 652 654 
+## 156 160 118 155 160 127 160 155 155 156 155 155 160 160 156 156 155 155 
+## 659 660 662 663 666 670 674 678  68 682 686 688 690 694  70 702 703 704 
+## 155 155 160 155 155 155 155 155 155 156 156 160 160 160 157 160 160 160 
+## 705 706 710 716  72 722 724 728 729 732 738 740 744 746 747 748 752 753 
+## 156 156 156 156 160 126 160 160 156 155 118 155 155 118 127 155 160 127 
+## 756  76 760 762 764 768 772 776 780 784 788 792 795 796 798   8 800 804 
+## 160 156 160 160 156 160 155 155 155 156 156 156 155 155 155 160 156 156 
+## 807 818 826 830 831 832 833 834  84 840 850 854 858  86 860 862 876 882 
+## 160 160 160 155 155 155 155 156 156 160 155 160 156 155 156 156 155 155 
+## 887 894   9  90 917 919  92  96  NA 
+## 156 156 126 155   9   9 155 155  15 
+## 
+## $areaname
+## 
+##                                                                             <c5>land Islands 
+##                                                                                           10 
+##                                                                                land Islands 
+##                                                                                            1 
+##                                                                                  Afghanistan 
+##                                                                                          160 
+##                                                                                       Africa 
+##                                                                                           78 
+##                                                                                Åland Islands 
+##                                                                                          144 
+##                                                                                      Albania 
+##                                                                                          160 
+##                                                                                      Algeria 
+##                                                                                          156 
+##                                                                               American Samoa 
+##                                                                                          155 
+##                                                                                     Americas 
+##                                                                                           78 
+##                                                                                      Andorra 
+##                                                                                          155 
+##                                                                                       Angola 
+##                                                                                          156 
+##                                                                                     Anguilla 
+##                                                                                          155 
+##                                                                          Antigua and Barbuda 
+##                                                                                          155 
+##                                                                                    Argentina 
+##                                                                                          160 
+##                                                                                      Armenia 
+##                                                                                          160 
+##                                                                                        Aruba 
+##                                                                                          155 
+##                                                                                         Asia 
+##                                                                                          100 
+##                                                                                    Australia 
+##                                                                                          160 
+##                                                                    Australia and New Zealand 
+##                                                                                           33 
+##                                                              Australia and New Zealand (M49) 
+##                                                                                           94 
+##                                                                                      Austria 
+##                                                                                          160 
+##                                                                                   Azerbaijan 
+##                                                                                          156 
+##                                                                                      Bahamas 
+##                                                                                          155 
+##                                                                                      Bahrain 
+##                                                                                          156 
+##                                                                                   Bangladesh 
+##                                                                                          156 
+##                                                                                     Barbados 
+##                                                                                          155 
+##                                                                                      Belarus 
+##                                                                                          156 
+##                                                                                      Belgium 
+##                                                                                          156 
+##                                                                                       Belize 
+##                                                                                          156 
+##                                                                                        Benin 
+##                                                                                          156 
+##                                                                                      Bermuda 
+##                                                                                          155 
+##                                                                                       Bhutan 
+##                                                                                          160 
+##                                                             Bolivia (Plurinational state of) 
+##                                                                                            4 
+##                                                             Bolivia (Plurinational State of) 
+##                                                                                          151 
+##                                                             Bonaire, Sint Eustatius and Saba 
+##                                                                                          155 
+##                                                                       Bosnia and Herzegovina 
+##                                                                                          157 
+##                                                                                     Botswana 
+##                                                                                          160 
+##                                                                                       Brazil 
+##                                                                                          156 
+##                                                               British Indian Ocean Territory 
+##                                                                                          155 
+##                                                                       British Virgin Islands 
+##                                                                                          155 
+##                                                                            Brunei Darussalam 
+##                                                                                          155 
+##                                                                                     Bulgaria 
+##                                                                                          156 
+##                                                                                 Burkina Faso 
+##                                                                                          160 
+##                                                                                      Burundi 
+##                                                                                          156 
+##                                                                             C<f4>te d'Ivoire 
+##                                                                                            9 
+##                                                                                   Cabo Verde 
+##                                                                                          151 
+##                                                                                     Cambodia 
+##                                                                                          160 
+##                                                                                     Cameroon 
+##                                                                                          160 
+##                                                                                       Canada 
+##                                                                                          156 
+##                                                                                   Cape Verde 
+##                                                                                            4 
+##                                                                                    Caribbean 
+##                                                                                           25 
+##                                                                              Caribbean (M49) 
+##                                                                                           93 
+##                                                                          Caribbean (MDG=M49) 
+##                                                                                            1 
+##                                                                    Caucasus and Central Asia 
+##                                                                                           25 
+##                                                              Caucasus and Central Asia (MDG) 
+##                                                                                           93 
+##                                                                               Cayman Islands 
+##                                                                                          155 
+##                                                                     Central African Republic 
+##                                                                                          156 
+##                                                                              Central America 
+##                                                                                           25 
+##                                                                        Central America (M49) 
+##                                                                                           94 
+##                                                                    Central and Southern Asia 
+##                                                                                           33 
+##                                                                                 Central Asia 
+##                                                                                           33 
+##                                                                           Central Asia (M49) 
+##                                                                                           94 
+##                                               Central Asia (M49) and Southern Asia (MDG=M49) 
+##                                                                                           94 
+##                                                                                         Chad 
+##                                                                                          156 
+##                                                                              Channel Islands 
+##                                                                                          155 
+##                                                                                        Chile 
+##                                                                                          160 
+##                                                                                        China 
+##                                                                                          156 
+##                                               China, Hong Kong Special Administrative Region 
+##                                                                                          156 
+##                                                   China, Macao Special Administrative Region 
+##                                                                                          155 
+##                                                                             Christmas Island 
+##                                                                                          155 
+##                                                                      Cocos (Keeling) Islands 
+##                                                                                          155 
+##                                                                                     Colombia 
+##                                                                                          156 
+##                                                                                      Comoros 
+##                                                                                          155 
+##                                                                                        Congo 
+##                                                                                          156 
+##                                                                                 Cook Islands 
+##                                                                                          155 
+##                                                                                   Costa Rica 
+##                                                                                          160 
+##                                                                                Cote d'Ivoire 
+##                                                                                            1 
+##                                                                                Côte d'Ivoire 
+##                                                                                          144 
+##                                                                                      Croatia 
+##                                                                                          160 
+##                                                                                Cte d'Ivoire 
+##                                                                                            2 
+##                                                                                         Cuba 
+##                                                                                          155 
+##                                                                                   Cura<e7>ao 
+##                                                                                           10 
+##                                                                                      Curaao 
+##                                                                                            1 
+##                                                                                      Curaçao 
+##                                                                                          144 
+##                                                                                       Cyprus 
+##                                                                                          156 
+##                                                                               Czech republic 
+##                                                                                            4 
+##                                                                               Czech Republic 
+##                                                                                            1 
+##                                                                                      Czechia 
+##                                                                                          155 
+##                                                        Democratic People's Republic of Korea 
+##                                                                                          155 
+##                                                             Democratic Republic of the Congo 
+##                                                                                          156 
+##                                                                                      Denmark 
+##                                                                                          160 
+## Developed regions (Europe, Cyprus, Israel, Northern America, Japan, Australia & New Zealand) 
+##                                                                                           25 
+##                                                                      Developed regions (MDG) 
+##                                                                                           93 
+##                                                                           Developing regions 
+##                                                                                           25 
+##                                                                     Developing regions (MDG) 
+##                                                                                           71 
+##                                                                                     Djibouti 
+##                                                                                          155 
+##                                                                                     Dominica 
+##                                                                                          155 
+##                                                                           Dominican Republic 
+##                                                                                          156 
+##                                                                               Eastern Africa 
+##                                                                                           25 
+##                                                                         Eastern Africa (M49) 
+##                                                                                           94 
+##                                                               Eastern and South-Eastern Asia 
+##                                                                                           33 
+##                                                                                 Eastern Asia 
+##                                                                                           33 
+##                                                               Eastern Asia (excluding Japan) 
+##                                                                                           25 
+##                                                                           Eastern Asia (M49) 
+##                                                                                           94 
+##                                          Eastern Asia (M49) and South-eastern Asia (MDG=M49) 
+##                                                                                           94 
+##                                                                           Eastern Asia (MDG) 
+##                                                                                           93 
+##                                                           Eastern Asia excluding China (MDG) 
+##                                                                                           53 
+##                                                                               Eastern Europe 
+##                                                                                           25 
+##                                                                         Eastern Europe (M49) 
+##                                                                                           94 
+##                                                                                      Ecuador 
+##                                                                                          160 
+##                                                                                        Egypt 
+##                                                                                          160 
+##                                                                                  El Salvador 
+##                                                                                          160 
+##                                                                            Equatorial Guinea 
+##                                                                                          155 
+##                                                                                      Eritrea 
+##                                                                                          155 
+##                                                                                      Estonia 
+##                                                                                          160 
+##                                                                                     Eswatini 
+##                                                                                           86 
+##                                                                                     Ethiopia 
+##                                                                                          156 
+##                                                                                       Europe 
+##                                                                                           33 
+##                                                                                 Europe (M49) 
+##                                                                                           93 
+##                                                                  Europe and Northern America 
+##                                                                                           33 
+##                                                                               Faeroe Islands 
+##                                                                                            4 
+##                                                                  Falkland Islands (Malvinas) 
+##                                                                                          155 
+##                                                                                Faroe Islands 
+##                                                                                          151 
+##                                                                                         Fiji 
+##                                                                                          155 
+##                                                                                      Finland 
+##                                                                                          160 
+##                                                                                       France 
+##                                                                                          160 
+##                                                                                French Guiana 
+##                                                                                          155 
+##                                                                             French Polynesia 
+##                                                                                          155 
+##                                                    French Southern and Antarctic Territories 
+##                                                                                          155 
+##                                                                                        Gabon 
+##                                                                                          156 
+##                                                                                       Gambia 
+##                                                                                          160 
+##                                                                                      Georgia 
+##                                                                                          160 
+##                                                                                      Germany 
+##                                                                                          160 
+##                                                                                        Ghana 
+##                                                                                          160 
+##                                                                                    Gibraltar 
+##                                                                                          155 
+##                                                                                       Greece 
+##                                                                                          160 
+##                                                                                    Greenland 
+##                                                                                          155 
+##                                                                                      Grenada 
+##                                                                                          155 
+##                                                                                   Guadeloupe 
+##                                                                                          155 
+##                                                                                         Guam 
+##                                                                                          155 
+##                                                                                    Guatemala 
+##                                                                                          156 
+##                                                                                     Guernsey 
+##                                                                                          155 
+##                                                                                       Guinea 
+##                                                                                          160 
+##                                                                                Guinea-Bissau 
+##                                                                                          155 
+##                                                                                       Guyana 
+##                                                                                          155 
+##                                                                                        Haiti 
+##                                                                                          160 
+##                                                            Heard Island and McDonald Islands 
+##                                                                                          155 
+##                                                                                     Holy See 
+##                                                                                          155 
+##                                                                                     Honduras 
+##                                                                                          155 
+##                                                                                      Hungary 
+##                                                                                          157 
+##                                                                                      Iceland 
+##                                                                                          160 
+##                                                                                        India 
+##                                                                                          156 
+##                                                                                    Indonesia 
+##                                                                                          156 
+##                                                                  International Centers (FAO) 
+##                                                                                            9 
+##                                                                   Iran (Islamic Republic of) 
+##                                                                                          156 
+##                                                                                         Iraq 
+##                                                                                          156 
+##                                                                                      Ireland 
+##                                                                                          160 
+##                                                                                  Isle of Man 
+##                                                                                          155 
+##                                                                                       Israel 
+##                                                                                          156 
+##                                                                                        Italy 
+##                                                                                          160 
+##                                                                                      Jamaica 
+##                                                                                          156 
+##                                                                                        Japan 
+##                                                                                          160 
+##                                                                                       Jersey 
+##                                                                                          155 
+##                                                                                       Jordan 
+##                                                                                          160 
+##                                                                                   Kazakhstan 
+##                                                                                          160 
+##                                                                                        Kenya 
+##                                                                                          160 
+##                                                                                     Kiribati 
+##                                                                                          155 
+##                                                                                       Kuwait 
+##                                                                                          156 
+##                                                                                   Kyrgyzstan 
+##                                                                                          160 
+##                                                       Landlocked developed countries (LLDCs) 
+##                                                                                            1 
+##                                                      Landlocked developing countries (LLDCs) 
+##                                                                                          126 
+##                                                             Lao People's Democratic Republic 
+##                                                                                          155 
+##                                                              Latin America and the Caribbean 
+##                                                                                           33 
+##                                                    Latin America and the Caribbean (MDG=M49) 
+##                                                                                           93 
+##                                                    Latin America and the Caribbean (SDG=MDG) 
+##                                                                                            1 
+##                                                                                       Latvia 
+##                                                                                          160 
+##                                                             Least developed countries (LDCs) 
+##                                                                                           18 
+##                                                             Least Developed Countries (LDCs) 
+##                                                                                          104 
+##                                                                                      Lebanon 
+##                                                                                          160 
+##                                                                                      Lesotho 
+##                                                                                          160 
+##                                                                                      Liberia 
+##                                                                                          160 
+##                                                                                        Libya 
+##                                                                                          152 
+##                                                                       Libyan Arab Jamahiriya 
+##                                                                                            4 
+##                                                                                Liechtenstein 
+##                                                                                          155 
+##                                                                                    Lithuania 
+##                                                                                          160 
+##                                                                                   Luxembourg 
+##                                                                                          160 
+##                                                                                   Madagascar 
+##                                                                                          156 
+##                                                                                       Malawi 
+##                                                                                          160 
+##                                                                                     Malaysia 
+##                                                                                          156 
+##                                                                                     Maldives 
+##                                                                                          155 
+##                                                                                         Mali 
+##                                                                                          156 
+##                                                                                        Malta 
+##                                                                                          156 
+##                                                                             Marshall Islands 
+##                                                                                          155 
+##                                                                                   Martinique 
+##                                                                                          155 
+##                                                                                   Mauritania 
+##                                                                                          156 
+##                                                                                    Mauritius 
+##                                                                                          160 
+##                                                                                      Mayotte 
+##                                                                                          155 
+##                                                                                    Melanesia 
+##                                                                                           25 
+##                                                                              Melanesia (M49) 
+##                                                                                          102 
+##                                                                                       Mexico 
+##                                                                                          160 
+##                                                                                   Micronesia 
+##                                                                                           25 
+##                                                              Micronesia (Federated State of) 
+##                                                                                            1 
+##                                                             Micronesia (Federated States of) 
+##                                                                                          154 
+##                                                                             Micronesia (M49) 
+##                                                                                           93 
+##                                                                                Middle Africa 
+##                                                                                           25 
+##                                                                          Middle Africa (M49) 
+##                                                                                           94 
+##                                                                                       Monaco 
+##                                                                                          155 
+##                                                                                     Mongolia 
+##                                                                                          160 
+##                                                                                   Montenegro 
+##                                                                                          160 
+##                                                                                   Montserrat 
+##                                                                                          155 
+##                                                                                      Morocco 
+##                                                                                          156 
+##                                                                                   Mozambique 
+##                                                                                          156 
+##                                                                                      Myanmar 
+##                                                                                          160 
+##                                                                                      Namibia 
+##                                                                                          160 
+##                                                                                        Nauru 
+##                                                                                          155 
+##                                                                                        Nepal 
+##                                                                                          160 
+##                                                                                  Netherlands 
+##                                                                                          156 
+##                                                                                New Caledonia 
+##                                                                                          155 
+##                                                                                  New Zealand 
+##                                                                                          160 
+##                                                                                    Nicaragua 
+##                                                                                          156 
+##                                                                                        Niger 
+##                                                                                          160 
+##                                                                                      Nigeria 
+##                                                                                          160 
+##                                                                                         Niue 
+##                                                                                          155 
+##                                                                               Norfolk Island 
+##                                                                                          155 
+##                                                                              North Macedonia 
+##                                                                                            2 
+##                                                                              Northern Africa 
+##                                                                                           33 
+##                                                                 Northern Africa (exc. Sudan) 
+##                                                                                           25 
+##                                                                        Northern Africa (M49) 
+##                                                                                           94 
+##                                                                        Northern Africa (MDG) 
+##                                                                                           93 
+##                                                             Northern Africa and Western Asia 
+##                                                                                           33 
+##                                                                             Northern America 
+##                                                                                           33 
+##                                                                       Northern America (M49) 
+##                                                                                           94 
+##                                                      Northern America (M49) and Europe (M49) 
+##                                                                                           94 
+##                                                                              Northern Europe 
+##                                                                                           25 
+##                                                                        Northern Europe (M49) 
+##                                                                                           94 
+##                                                                     Northern Mariana Islands 
+##                                                                                          155 
+##                                                                                       Norway 
+##                                                                                          160 
+##                                                               Occupied Palestinian Territory 
+##                                                                                            4 
+##                                                                                      Oceania 
+##                                                                                           33 
+##                                                     Oceania (exc. Australia and New Zealand) 
+##                                                                                           33 
+##                                                                                Oceania (M49) 
+##                                                                                           93 
+##                                      Oceania (M49) excluding Australia and New Zealand (M49) 
+##                                                                                          115 
+##                                            Oceania, exc. Australia and New Zealand (SDG=MDG) 
+##                                                                                            1 
+##                                                                                         Oman 
+##                                                                                          155 
+##                                                                                     Pakistan 
+##                                                                                          156 
+##                                                                                        Palau 
+##                                                                                          155 
+##                                                                                       Panama 
+##                                                                                          156 
+##                                                                             Papua New Guinea 
+##                                                                                          155 
+##                                                                                     Paraguay 
+##                                                                                          156 
+##                                                                                         Peru 
+##                                                                                          156 
+##                                                                                  Philippines 
+##                                                                                          160 
+##                                                                                     Pitcairn 
+##                                                                                          155 
+##                                                                                       Poland 
+##                                                                                          160 
+##                                                                                    Polynesia 
+##                                                                                           25 
+##                                                                              Polynesia (M49) 
+##                                                                                           93 
+##                                                                                     Portugal 
+##                                                                                          160 
+##                                                                                  Puerto Rico 
+##                                                                                          156 
+##                                                                                        Qatar 
+##                                                                                          155 
+##                                                                                   R<e9>union 
+##                                                                                           10 
+##                                                                                     Regional 
+##                                                                                           15 
+##                                                                       Regional Centres (FAO) 
+##                                                                                            9 
+##                                                                            Republic of Korea 
+##                                                                                          160 
+##                                                                          Republic of Moldova 
+##                                                                                          160 
+##                                                                                      Réunion 
+##                                                                                          144 
+##                                                                                      Romania 
+##                                                                                          160 
+##                                                                           Russian Federation 
+##                                                                                          156 
+##                                                                                       Rwanda 
+##                                                                                          156 
+##                                                                                      Runion 
+##                                                                                            1 
+##                                                                             Saint-Barthélemy 
+##                                                                                            4 
+##                                                                          Saint Barth<e9>lemy 
+##                                                                                           10 
+##                                                                             Saint Barthélemy 
+##                                                                                          140 
+##                                                                             Saint Barthlemy 
+##                                                                                            1 
+##                                                                                 Saint Helena 
+##                                                                                          155 
+##                                                                        Saint Kitts and Nevis 
+##                                                                                          155 
+##                                                                                  Saint Lucia 
+##                                                                                          160 
+##                                                                   Saint Martin (French part) 
+##                                                                                            4 
+##                                                                   Saint Martin (French Part) 
+##                                                                                          151 
+##                                                                    Saint Pierre and Miquelon 
+##                                                                                          155 
+##                                                             Saint Vincent and the Grenadines 
+##                                                                                          155 
+##                                                                                        Samoa 
+##                                                                                          155 
+##                                                                                   San Marino 
+##                                                                                          155 
+##                                                                        Sao Tome and Principe 
+##                                                                                          155 
+##                                                                                 Saudi Arabia 
+##                                                                                          156 
+##                                                                                      Senegal 
+##                                                                                          156 
+##                                                                                       Serbia 
+##                                                                                          160 
+##                                                                                   Seychelles 
+##                                                                                          160 
+##                                                                                 Sierra Leone 
+##                                                                                          160 
+##                                                                                    Singapore 
+##                                                                                          160 
+##                                                                    Sint Maarten (Dutch part) 
+##                                                                                          155 
+##                                                                                     Slovakia 
+##                                                                                          160 
+##                                                                                     Slovenia 
+##                                                                                          156 
+##                                                        Small island developing States (SIDS) 
+##                                                                                           51 
+##                                                        Small Island Developing States (SIDS) 
+##                                                                                           75 
+##                                                                              Solomon Islands 
+##                                                                                          155 
+##                                                                                      Somalia 
+##                                                                                          156 
+##                                                                           South-Eastern Asia 
+##                                                                                           33 
+##                                                                 South-eastern Asia (MDG=M49) 
+##                                                                                           94 
+##                                                                                 South Africa 
+##                                                                                          156 
+##                                                                                South America 
+##                                                                                           25 
+##                                                                          South America (M49) 
+##                                                                                           94 
+##                                                 South Georgia and the South Sandwich Islands 
+##                                                                                          155 
+##                                                                                  South Sudan 
+##                                                                                          160 
+##                                                                              Southern Africa 
+##                                                                                           25 
+##                                                                        Southern Africa (M49) 
+##                                                                                           89 
+##                                                                                Southern Asia 
+##                                                                                           33 
+##                                                                      Southern Asia (MDG=M49) 
+##                                                                                           94 
+##                                                          Southern Asia excluding India (MDG) 
+##                                                                                           53 
+##                                                                              Southern Europe 
+##                                                                                           25 
+##                                                                        Southern Europe (M49) 
+##                                                                                           94 
+##                                                                                        Spain 
+##                                                                                          160 
+##                                                                                    Sri Lanka 
+##                                                                                          156 
+##                                                                           State of Palestine 
+##                                                                                          156 
+##                                                                           Sub-Saharan Africa 
+##                                                                                           33 
+##                                                              Sub-Saharan Africa (inc. Sudan) 
+##                                                                                           25 
+##                                                                     Sub-Saharan Africa (M49) 
+##                                                                                           94 
+##                                                                     Sub-Saharan Africa (MDG) 
+##                                                                                           93 
+##                                                                                        Sudan 
+##                                                                                          156 
+##                                                                                     Suriname 
+##                                                                                          155 
+##                                                               Svalbard and Jan Mayen Islands 
+##                                                                                          155 
+##                                                                                    Swaziland 
+##                                                                                           69 
+##                                                                                       Sweden 
+##                                                                                          160 
+##                                                                                  Switzerland 
+##                                                                                          160 
+##                                                                         Syrian Arab Republic 
+##                                                                                          160 
+##                                                                                   Tajikistan 
+##                                                                                          160 
+##                                                                                     Thailand 
+##                                                                                          156 
+##                                                    The former Yugoslav Republic of Macedonia 
+##                                                                                          158 
+##                                                                                  Timor-Leste 
+##                                                                                          155 
+##                                                                                         Togo 
+##                                                                                          160 
+##                                                                                      Tokelau 
+##                                                                                          155 
+##                                                                                        Tonga 
+##                                                                                          155 
+##                                                                          Trinidad and Tobago 
+##                                                                                          155 
+##                                                                                      Tunisia 
+##                                                                                          156 
+##                                                                                       Turkey 
+##                                                                                          156 
+##                                                                                 Turkmenistan 
+##                                                                                          155 
+##                                                                     Turks and Caicos Islands 
+##                                                                                          155 
+##                                                                                       Tuvalu 
+##                                                                                          155 
+##                                                                                       Uganda 
+##                                                                                          156 
+##                                                                                      Ukraine 
+##                                                                                          156 
+##                                                                         United Arab Emirates 
+##                                                                                          156 
+##                                                                               United Kingdom 
+##                                                                                            4 
+##                                         United Kingdom of Great Britain and Northern Ireland 
+##                                                                                          156 
+##                                                                  United Republic of Tanzania 
+##                                                                                          156 
+##                                                         United States minor outlying islands 
+##                                                                                          155 
+##                                                                     United States of America 
+##                                                                                          160 
+##                                                                 United States Virgin Islands 
+##                                                                                          155 
+##                                                                                      Uruguay 
+##                                                                                          156 
+##                                                                                   Uzbekistan 
+##                                                                                          156 
+##                                                                                      Vanuatu 
+##                                                                                          155 
+##                                                           Venezuela (Bolivarian Republic of) 
+##                                                                                          156 
+##                                                                                     Viet Nam 
+##                                                                                          160 
+##                                                                    Wallis and Futuna Islands 
+##                                                                                          155 
+##                                                                               Western Africa 
+##                                                                                           25 
+##                                                                         Western Africa (M49) 
+##                                                                                           94 
+##                                                                                 Western Asia 
+##                                                                                           33 
+##                          Western Asia (exc. Armenia, Azerbaijan, Cyprus, Israel and Georgia) 
+##                                                                                           25 
+##                                                                           Western Asia (M49) 
+##                                                                                            7 
+##                                           Western Asia (M49) and Northern Africa (M49) (M49) 
+##                                                                                            6 
+##                                                                           Western Asia (MDG) 
+##                                                                                           93 
+##                                                                           Western Asia (M49) 
+##                                                                                           87 
+##                                                 Western Asia (M49) and Northern Africa (M49) 
+##                                                                                           87 
+##                                          Western Asia<U+00A0>(M49) and Northern Africa (M49) 
+##                                                                                            1 
+##                                                                               Western Europe 
+##                                                                                           25 
+##                                                                         Western Europe (M49) 
+##                                                                                           94 
+##                                                                               Western Sahara 
+##                                                                                          155 
+##                                                                                        World 
+##                                                                                          128 
+##                                                                                        WORLD 
+##                                                                                           18 
+##                                                                                        Yemen 
+##                                                                                          156 
+##                                                                                       Zambia 
+##                                                                                          156 
+##                                                                                     Zimbabwe 
+##                                                                                          156 
+## 
+## $areatype
+## 
+##                  1.0-Global          2.1-Regional (SDG) 
+##                         146                        2179 
+##         2.3-Other groupings          2.4-Regional (M49) 
+##                         374                        1922 
+##          2.5-Regional (MDG)                 3.0-Country 
+##                         910                       38756 
+##           4.0-Not-specified   Atlantic, Eastern Central 
+##                          18                           1 
+##         Atlantic, Northeast         Atlantic, Northwest 
+##                           1                           1 
+##         Atlantic, Southeast         Atlantic, Southwest 
+##                           1                           1 
+##   Atlantic, Western Central       Indian Ocean, Eastern 
+##                           1                           1 
+##       Indian Ocean, Western Mediterranean and Black Sea 
+##                           1                           1 
+##    Pacific, Eastern Central          Pacific, Northeast 
+##                           1                           1 
+##          Pacific, Northwest          Pacific, Southeast 
+##                           1                           1 
+##          Pacific, Southwest    Pacific, Western Central 
+##                           1                           1 
+## 
+## $indicator
+## 
+## 14.4.1 14.6.1 14.7.1 14.b.1 15.1.1 15.2.1 15.4.2  2.1.1  2.1.2  2.3.1 
+##     35    294   5292    294   1168   6132    276   5045    988   2223 
+##  2.3.2  2.5.1  2.5.2  2.a.1  2.c.1  6.4.1  6.4.2 
+##   3211   3244   5800   5202   2964   1076   1076 
+## 
+## $indicatorDescription
+## 
+##                                                                                     Above-ground biomass in forest per hectare (tonnes per hectare) 
+##                                                                                                                                                 988 
+##                                                                                             Above-ground biomass in forest, per hectare (tonnes/ha) 
+##                                                                                                                                                 180 
+##                                                                                           Agriculture orientation index for government expenditures 
+##                                                                                                                                                5202 
+##                                                                          Average income of small-scale food producers, by sex and indigenous status 
+##                                                                                                                                                3211 
+## Degree of application of a legal/regulatory/policy/institutional framework which recognizes and\nprotects access rights for small-scale fisheries\n 
+##                                                                                                                                                 294 
+##                                                                                                  Forest area as a proportion of total land area (%) 
+##                                                                                                                                                1168 
+##                                                  Forest area certified under an independently verified certification scheme (thousands of hectares) 
+##                                                                                                                                                2044 
+##                                                                                                                     Forest area net change rate (%) 
+##                                                                                                                                                 876 
+##                                                                                        Indicator of Food Price Anomalies (IFPA), by type of product 
+##                                                                                                                                                2964 
+##                                                  Level of water stress: freshwater withdrawal as a proportion of available freshwater resources (%) 
+##                                                                                                                                                1076 
+##                                                                                                                          Mountain Green Cover Index 
+##                                                                                                                                                 276 
+##                       Percentage of animal genetic resources for food and agriculture secured in either medium or long-term conservation facilities 
+##                                                                                                                                                 580 
+##                                                                                          Plant genetic resources accessions stored ex situ (number) 
+##                                                                                                                                                2664 
+##                                                                             Prevalence of severe food insecurity, total with upper/lower bounds (%) 
+##                                                                                                                                                 988 
+##                                                                                                           Prevalence of undernourishment, total (%) 
+##                                                                                                                                                5045 
+##                                                                                                          Productivity of small-scale food producers 
+##                                                                                                                                                2223 
+##    Progress by countries in the degree of implementation of international instruments aiming to\ncombat illegal, unreported and unregulated fishing 
+##                                                                                                                                                 294 
+##                                                     Proportion of fish stocks within biologically sustainable levels (not overexploited), total (%) 
+##                                                                                                                                                  35 
+##                                                                               Proportion of forest area with a long-term forest management plan (%) 
+##                                                                                                                                                 876 
+##                                                                            Proportion of forest area within legally established protected areas (%) 
+##                                                                                                                                                1168 
+##                                                                                Proportion of local breeds classified as being at risk of extinction 
+##                                                                                                                                                4940 
+##                                       Proportion of local breeds classified as being at risk, not-at-risk or at unknown level of risk of extinction 
+##                                                                                                                                                 860 
+##                                                                                                        Sustainable fisheries as a percentage of GDP 
+##                                                                                                                                                5292 
+##                                                                                                                                Water Use Efficiency 
+##                                                                                                                                                1076 
+## 
+## $timeperiod
+## 
+##      1974      1978      1979      1981      1983      1985      1987 
+##         1         1         1         1         1         1         1 
+##      1989      1990      1992      1995      1997 1998-2002      2000 
+##         1         1         1       297         1       538      2924 
+##      2001      2002      2003 2003-2007      2004      2005      2006 
+##      1167      1167      1167       538      1415      3709      1415 
+##      2007      2008 2008-2012      2009      2010      2011      2012 
+##      1414      1662       538      1662      3462      1662      1957 
+##      2013 2013-2017      2014      2015      2016      2017      2018 
+##      1662       538      1957      3679      4177      3266      1756 
+##      2019 
+##       580 
+## 
+## $unit
+## 
+##                                                                                          % 
+##                                                                                       6068 
+##                                                                                   % of GDP 
+##                                                                                       5292 
+##                  Agricultural output per labour day, PPP (constant 2011 international $)\n 
+##                                                                                       2223 
+##              Average annual income from agriculture, PPP (constant 2011 international $)\n 
+##                                                                                       3211 
+##                                                                                      HA_TH 
+##                                                                                       2044 
+##                                                                                      Index 
+##                                                                                       3240 
+##                                                                                      INDEX 
+##                                                                                       2331 
+##                                              Level of implementation: 1 lowest - 5 highest 
+##                                                                                        294 
+##                                             Level of implementation: 1 lowest to 5 highest 
+##                                                                                        294 
+##                                                                                     NUMBER 
+##                                                                                       2664 
+##                                                                                    PERCENT 
+##                                                                                       5164 
+##                     Percentage of breeds at risk (Percentage of breeds of unknown status ) 
+##                                                                                       5800 
+## Percentage of local breeds for which sufficient material is stored allowing reconstitution 
+##                                                                                        580 
+##                                                                                   T_PER_HA 
+##                                                                                       1168 
+##                                                                                     US$/m3 
+##                                                                                       1076 
+## 
+## $version
+## 
+##     Last Update: 3/2019  Last update: July 2019  Last update: June 2019 
+##                    6033                    9032                    1076 
+## Last update: March 2019 Last Update: March 2019 
+##                   22379                    5800
+\end{verbatim}
+
+
+\end{document}

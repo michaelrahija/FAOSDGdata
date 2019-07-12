@@ -6,7 +6,7 @@
 #'
 #' @return This function returns a dataframe containing the latest published data
 #'
-#'#' @importFrom readxl read_xls
+#' @importFrom readxl read_xls
 #' @export
 
 getData <- function(sdg = c("2.1.1",
@@ -42,6 +42,9 @@ getData <- function(sdg = c("2.1.1",
     } else if (sdg == "2.5.1_Animals"){
       url <- "http://sdlc.fao.org/artifactory/fao-sdg-releases/2.5.1%20animals/2_5_1_Animals_DataExport_3_2019.xls"
       
+    } else if (sdg == "14.7.1"){
+      url <- "http://sdlc.fao.org/artifactory/fao-sdg-releases/14.7.1/14_7_1_DataExport_7_2019.xls"
+      
     } else if (sdg %in% c("6.4.1", "6.4.2")){
       base_url <- sprintf("http://sdlc.fao.org/artifactory/fao-sdg-releases/%s/", sdg)
       mid_url <- gsub("\\.", "_", sdg)
@@ -71,7 +74,7 @@ getData <- function(sdg = c("2.1.1",
     version <-readxl::read_xls(dl_file,
                                sheet = "version")
     
-  } else{
+  } else {
     
     files.full <- list.files("data/", full.names = T)
     sdg.name <- gsub(pattern = "\\.",

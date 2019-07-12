@@ -1,0 +1,91 @@
+---
+title: "SDG Combining report"
+author: "Michael Rahija"
+date: "July 12, 2019"
+output:
+  html_document: default
+  pdf_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+# Report to combine datasets
+
+## Load package 
+```{r }
+#set up
+knitr::opts_chunk$set(echo = T, warning=F, message = F)
+library(FAOSDGdata)
+library(dplyr)
+
+```
+
+### Download single dataset through API
+
+```{r }
+sdg <- getData("2.1.1", 
+               source = "web")
+
+head(sdg)
+```
+
+### Download all SDGs and save to list
+
+```{r }
+sdgs <- c("2.1.1",
+          "2.1.2",
+          "2.3.1",
+          "2.3.2",
+          "2.5.1_Plants",
+          "2.5.1_Animals",
+          "2.5.2",
+          "2.a.1",
+          "2.c.1",
+          "6.4.1",
+          "6.4.2",
+          "14.4.1",
+          "14.6.1",
+          "14.7.1",
+          "14.b.1",
+          "15.1.1",
+          "15.2.1",
+          "15.4.2")
+
+allSdgs <- lapply(sdgs, function(x) getData(x, source = "web"))
+
+head(allSdgs)
+
+```
+
+
+### Clean single dataset to have easier column names, consistent classes, and only keep columns needed for analysis.
+```{r }
+cleandf <- getData("2.1.2", 
+                  source = "web") %>%
+           cleanData()
+
+head(cleandf)
+```
+
+### Get all dataset, clean them, merge into single datafarme
+```{r }
+cleanall <- lapply(allSdgs, cleanData)
+
+sdgsdf <- do.call("rbind", cleanall)
+
+nrow(sdgsdf)
+head(sdgsdf)
+
+```
+
+
+### Get all dataset, clean them, merge into single datafarme
+```{r }
+#look at vars, remove value to skip tabulation
+for.table <- select(sdgsdf,-value)
+t <- sapply(for.table, table)
+
+t
+
+
+```
