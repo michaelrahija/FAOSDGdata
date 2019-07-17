@@ -35,46 +35,47 @@ getData <- function(sdg = c("2.1.1",
   #build uRL
   
   if(source == "web"){
-    #custom URL for 2.5.1 plants
-    if(sdg == "2.5.1_Plants"){
-      url <-"http://sdlc.fao.org/artifactory/fao-sdg-releases/2.5.1%20plants/2_5_1_Plants_DataExport_3_2019.xls" 
-      
-    } else if (sdg == "2.5.1_Animals"){
-      url <- "http://sdlc.fao.org/artifactory/fao-sdg-releases/2.5.1%20animals/2_5_1_Animals_DataExport_3_2019.xls"
-      
-    } else if (sdg == "14.7.1"){
-      url <- "http://sdlc.fao.org/artifactory/fao-sdg-releases/14.7.1/14_7_1_DataExport_7_2019.xls"
-      
-    } else if (sdg %in% c("6.4.1", "6.4.2")){
-      base_url <- sprintf("http://sdlc.fao.org/artifactory/fao-sdg-releases/%s/", sdg)
-      mid_url <- gsub("\\.", "_", sdg)
-      end_url <- paste0("_","DataExport_6_2019.xls")
-      url <- paste0(base_url, mid_url,end_url)
-      
-    } else {
-      base_url <- sprintf("http://sdlc.fao.org/artifactory/fao-sdg-releases/%s/", sdg)
-      mid_url <- gsub("\\.", "_", sdg)
-      end_url <- paste0("_","DataExport_3_2019.xls")
-      url <- paste0(base_url, mid_url,end_url)
-      
-    }
-  
-    #download SDG file
-    dl_file <- tempfile(fileext = ".xls")
-  
-    download.file(url,
-                  destfile = dl_file,
-                  mode  = "wb",
-                  quiet = T)
+      #custom URL for 2.5.1 plants
+      if(sdg == "2.5.1_Plants"){
+        url <-"https://sdlc.fao.org/artifactory/list/fao-sdg-releases/2.5.1%20plants/2_5_1_Plants_DataExport_3_2019.xls" 
+        
+      } else if (sdg == "2.5.1_Animals"){
+        url <- "https://sdlc.fao.org/artifactory/list/fao-sdg-releases/2.5.1%20animals/2_5_1_Animals_DataExport_3_2019.xls"
+        
+      } else if (sdg == "14.7.1"){
+        url <- "https://sdlc.fao.org/artifactory/list/fao-sdg-releases/14.7.1/14_7_1_DataExport_7_2019.xls"
+        
+      } else if (sdg %in% c("6.4.1", "6.4.2")){
+        base_url <- sprintf("https://sdlc.fao.org/artifactory/list/fao-sdg-releases/%s/", sdg)
+        mid_url <- gsub("\\.", "_", sdg)
+        end_url <- paste0("_","DataExport_6_2019.xls")
+        url <- paste0(base_url, mid_url,end_url)
+        
+      } else {
+        base_url <- sprintf("https://sdlc.fao.org/artifactory/list/fao-sdg-releases/%s/", sdg)
+        mid_url <- gsub("\\.", "_", sdg)
+        end_url <- paste0("_","DataExport_3_2019.xls")
+        url <- paste0(base_url, mid_url,end_url)
+        
+      }
+  }
     
-    #extract dataset, and version
-    df <- readxl::read_xls(dl_file,
-                           sheet = "data")
+  #download SDG file
+  dl_file <- tempfile(fileext = ".xls")
     
-    version <-readxl::read_xls(dl_file,
-                               sheet = "version")
-    
-  } else {
+  download.file(url,
+                destfile = dl_file,
+               mode  = "wb",
+                quiet = T)
+      
+  #extract dataset, and version
+  df <- readxl::read_xls(dl_file,
+                         sheet = "data")
+      
+  version <-readxl::read_xls(dl_file,
+                             sheet = "version")
+
+  if(source == "local") {
     
     files.full <- list.files("data/", full.names = T)
     sdg.name <- gsub(pattern = "\\.",
