@@ -2,5 +2,6 @@
 
 export(cleanData)
 export(getData)
+export(getDatasets)
 importFrom(dplyr,select)
 importFrom(readxl,read_xls)
