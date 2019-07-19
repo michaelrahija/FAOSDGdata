@@ -1,10 +1,14 @@
 #' getData
 #' This is function which takes as an input an SDG indicator, and returns
-#' the latest dataset for that indicator as a dataframe.
+#' the latest dataset for that indicator as a dataframe. Pay attention to the naming of the
+#' SDG indicators in the default settings. 
 #'
 #' @param sdg is a specific SDG indicator under FAO custodianship
+#' @param source is the source from which you would like to load the data. If it's
+#' "local" you risk it not being up-to-date. The files disseminated over the "web" 
+#' should always be up-to-date.
 #'
-#' @return This function returns a dataframe containing the latest published data
+#' @return This function returns a tibble containing the latest published data
 #'
 #' @importFrom readxl read_xls
 #' @export
@@ -77,19 +81,20 @@ getData <- function(sdg = c("2.1.1",
 
   if(source == "local") {
     
-    files.full <- list.files("data/", full.names = T)
-    sdg.name <- gsub(pattern = "\\.",
-                     replacement = "_",
-                     sdg)
-    
-    file.to.read <- files.full[grep(sdg.name,files.full)]
-    
-    df <- readxl::read_xls(file.to.read, 
-                           sheet = "data")
-    
-    version <-readxl::read_xls(file.to.read,
-                               sheet = "version")
-                           
+    stop("local file not configured yet")
+    # files.full <- list.files("data/", full.names = T)
+    # sdg.name <- gsub(pattern = "\\.",
+    #                  replacement = "_",
+    #                  sdg)
+    # 
+    # file.to.read <- files.full[grep(sdg.name,files.full)]
+    # 
+    # df <- readxl::read_xls(file.to.read, 
+    #                        sheet = "data")
+    # 
+    # version <-readxl::read_xls(file.to.read,
+    #                            sheet = "version")
+    #                        
   }
   
   
