@@ -418,28 +418,9 @@ head(sdg)</code></pre>
 ## #   Type` &lt;lgl&gt;, Source &lt;chr&gt;, FootNote &lt;chr&gt;, Disaggregation &lt;lgl&gt;,
 ## #   version &lt;chr&gt;</code></pre>
 </div>
-<div id="download-all-sdgs-and-save-to-list" class="section level3">
-<h3>Download all SDGs and save to list</h3>
-<pre class="r"><code>sdgs &lt;- c(&quot;2.1.1&quot;,
-          &quot;2.1.2&quot;,
-          &quot;2.3.1&quot;,
-          &quot;2.3.2&quot;,
-          &quot;2.5.1_Plants&quot;,
-          &quot;2.5.1_Animals&quot;,
-          &quot;2.5.2&quot;,
-          &quot;2.a.1&quot;,
-          &quot;2.c.1&quot;,
-          &quot;6.4.1&quot;,
-          &quot;6.4.2&quot;,
-          &quot;14.4.1&quot;,
-          &quot;14.6.1&quot;,
-          &quot;14.7.1&quot;,
-          &quot;14.b.1&quot;,
-          &quot;15.1.1&quot;,
-          &quot;15.2.1&quot;,
-          &quot;15.4.2&quot;)
-
-allSdgs &lt;- lapply(sdgs, function(x) getData(x, source = &quot;web&quot;))
+<div id="download-multiples-sdg-datasets" class="section level3">
+<h3>Download multiples SDG datasets</h3>
+<pre class="r"><code>allSdgs &lt;- getDatasets(all = T)
 
 head(allSdgs)</code></pre>
 <pre><code>## [[1]]
@@ -1000,6 +981,9 @@ areas</code></pre>
 ## 16 &lt;NA&gt;                                                                2871</code></pre>
 </div>
 </div>
+</div>
+<div id="added-line-of-code-to-test-update-from-home." class="section level1">
+<h1>Added line of code to test update from home.</h1>
 </div>
 
 
