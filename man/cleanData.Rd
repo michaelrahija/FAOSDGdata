@@ -2,10 +2,7 @@
 % Please edit documentation in R/cleanData.R
 \name{cleanData}
 \alias{cleanData}
-\title{cleanData
-This is function which takes as an input a dataframe containing data
-for a particular indicator, and outputs a dataframe with simplied column names
-and classes.}
+\title{cleanData}
 \usage{
 cleanData(sdgdf)
 }
@@ -16,8 +13,7 @@ cleanData(sdgdf)
 This function returns a dataframe containing the cleaned data frame
 }
 \description{
-cleanData
 This is function which takes as an input a dataframe containing data
-for a particular indicator, and outputs a dataframe with simplied column names
-and classes.
+for a particular indicator, and outputs a dataframe with simplied column names, c
+consistent classes, and proper M49 geo names.
 }

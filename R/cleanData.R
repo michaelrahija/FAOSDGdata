@@ -8,7 +8,9 @@
 #'
 #' @return This function returns a dataframe containing the cleaned data frame
 #'
-#' @importFrom dplyr select
+#' @importFrom dplyr select rename left_join
+#' @importFrom stringr str_length
+#' @importFrom tidyselect everything
 #' @export
 
 cleanData <- function(sdgdf){
@@ -38,10 +40,23 @@ cleanData <- function(sdgdf){
   
   #clean classes
   df[] <- lapply(df, as.character)
-
   
+  #clean codes in df
+  df$areacode[str_length(df$areacode) == 1] <- paste0("00", df$areacode[str_length(df$areacode) == 1])
+  df$areacode[str_length(df$areacode) == 2] <- paste0("0", df$areacode[str_length(df$areacode) == 2])
+  
+  #add official m49 name column
+  df <- left_join(df, 
+                m49, #internal dataframe
+                by = c("areacode" = "Code"))
+  
+  #since some areas are combination with no official, take areaname if Name is NA
+  df$Name[is.na(df$Name)] <- df$areaname[is.na(df$Name)]
+  df <- df %>%
+          select(-areaname) %>%
+          rename(areaname = Name) %>%
+          select(areacode, areaname, everything())
   
 df  
-  
   
 }
