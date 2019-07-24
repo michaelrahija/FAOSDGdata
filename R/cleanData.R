@@ -1,7 +1,8 @@
 #' cleanData
+#' 
 #' This is function which takes as an input a dataframe containing data
-#' for a particular indicator, and outputs a dataframe with simplied column names
-#' and classes.
+#' for a particular indicator, and outputs a dataframe with simplied column names, c
+#' consistent classes, and proper M49 geo names.
 #'
 #' @param sdgdf is a data frame referring to a specific SDG
 #'
@@ -37,8 +38,8 @@ cleanData <- function(sdgdf){
   
   #clean classes
   df[] <- lapply(df, as.character)
-  df$value <- as.numeric(df$value)
 
+  
   
 df  
   
