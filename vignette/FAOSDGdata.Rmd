@@ -67,9 +67,9 @@ areas <- sdgsdf %>%
               summarize(n = n()) %>% 
               as.data.frame()
 
-areas$areaname <- substr(areas$areaname, start = 1, stop = 25)
+areas$areaname <- substr(areas$areaname, start = 1, stop = 50)
 
-areas
+arrange(areas, areaname)
 
 ```
 
