@@ -65,13 +65,21 @@ head(sdgsdf)
 areas <- sdgsdf %>% 
               group_by(areacode, areaname) %>% 
               summarize(n = n()) %>% 
+              group_by(areacode) %>%
+              mutate(AreaCodeRepete = n()) %>%
+              arrange(areacode) %>%
               as.data.frame()
+
 
 areas$areaname <- substr(areas$areaname, start = 1, stop = 50)
 
 arrange(areas, areaname)
-
 ```
+
+
+
+
+
 
 ### Tabulate to check for units
 ```{r }

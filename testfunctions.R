@@ -1,6 +1,17 @@
 #test functions
 library(dplyr)
 
+
+
+
+x <- getDatasets(all = T)
+
+xlist <- lapply(x, cleanData)
+
+y <- do.call("rbind",xlist)
+
+
+
 source("R/getData.R")
 
 sdgs <- c("2.1.1",
@@ -73,5 +84,22 @@ for(i in 1:length(y)){
   
 }
 
+#geo names
+rawSdgs <- getDatasets(all = T)
+allSdgs <- rawSdgs
+cleanall <- lapply(allSdgs, cleanData)
+sdgsdf <- do.call("rbind", cleanall)
+write.csv(sdgsdf, file = "~/Desktop/temp_raw_dataframe.csv", row.names = F)
+
+##need to clean country, and geo area names. 
+##
+##need to create df with country, value, indicator, for the latest year
+
+x <- cleanSdgs
+geo <- x %>% 
+        group_by(areaname, areacode) %>% 
+        summarize(n = n()) %>%
+        arrange(areaname) %>%
+        as.data.frame()
 
 

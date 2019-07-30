@@ -14,6 +14,6 @@ This function returns a dataframe containing the cleaned data frame
 }
 \description{
 This is function which takes as an input a dataframe containing data
-for a particular indicator, and outputs a dataframe with simplied column names, c
-consistent classes, and proper M49 geo names.
+for a particular indicator, and outputs a dataframe simplied column names, and 
+all columns in the class character.
 }
