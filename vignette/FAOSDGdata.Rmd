@@ -90,4 +90,44 @@ sdgsdf %>%
 
 ```
 
-# Added line of code to test update from home.
+# Create country data file
+```{r }
+
+#This dataset, already omiported and cleaned
+sdgsdf <- read.csv("~/Desktop/temp_raw_dataframe.csv", stringsAsFactors = F)
+cleanSdgs <- sdgsdf
+cr <- cleanSdgs
+
+#remove observations without codes
+cr <- filter(cr, !is.na(areacode))
+
+cr_m <-  left_join(cr,
+                   m49, #internal dataframe
+                   by = c("areacode" = "Code"))
+
+
+
+#add 0s to codes for sdg dataset
+cr$areacode[str_length(cr$areacode) == 1] <- paste0("00", ... = cr$areacode[str_length(cr$areacode) == 1])
+cr$areacode[str_length(cr$areacode) == 2] <- paste0("0", cr$areacode[str_length(cr$areacode) == 2])
+
+cr <- filter(cleanSdgs, areatype == "2.4-Regional (M49)" |
+                        areatype == "" some say regional M49, others say Regional SDG
+                        areatype == "3.0-Country")
+
+#add 0s to codes for sdg dataset
+cr$areacode[str_length(cr$areacode) == 1] <- paste0("00", ... = cr$areacode[str_length(cr$areacode) == 1])
+cr$areacode[str_length(cr$areacode) == 2] <- paste0("0", cr$areacode[str_length(cr$areacode) == 2])
+  
+cr_m <-  left_join(cr,
+                   m49, #internal dataframe
+                   by = c("areacode" = "Code"))
+
+#drop whatever doesnt' match in m49
+cr_m <- filter(cr_m, !is.na(Name))
+
+
+#check geo names
+test <- cr_m %>% group_by(Name, areacode) %>% summarize(n = n())
+
+```
