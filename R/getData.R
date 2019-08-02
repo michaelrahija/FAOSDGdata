@@ -55,6 +55,12 @@ getData <- function(sdg = c("2.1.1",
         end_url <- paste0("_","DataExport_6_2019.xls")
         url <- paste0(base_url, mid_url,end_url)
         
+      } else if (sdg %in% c("2.1.1")){
+        base_url <- sprintf("https://sdlc.fao.org/artifactory/list/fao-sdg-releases/%s/", sdg)
+        mid_url <-paste0("FAO_", gsub("\\.", "_", sdg))
+        end_url <- paste0("_","export.xls")
+        url <- paste0(base_url, mid_url,end_url)
+        
       } else {
         base_url <- sprintf("https://sdlc.fao.org/artifactory/list/fao-sdg-releases/%s/", sdg)
         mid_url <- gsub("\\.", "_", sdg)
