@@ -12,6 +12,8 @@ devtools::install_github("michaelrahija/FAOSDGdata")
 ## Download SDG datasets
 
 ```r
+#load package
+library(FAOSDGdata)
 
 #getData returns the dataset for a single SDG indicator
 PoU <- getData("2.1.1")
@@ -28,8 +30,7 @@ all_sdgs <- getDatasets(all = T)
 There is dataset called m49 which is embedded in the package which provides the complete list of M49 countries, territories, regions, and codes. You can access with the following:
 
 ```r
-#load package
-library(FAOSDGdata)
+
 head(m49)
 
 ```
