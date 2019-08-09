@@ -19,8 +19,8 @@ scrape_m49 <- function(){
   if(website1$status_code != 200) stop("Website returned error. Check URL for M49 scraping")
   
   
-  tbls <- rvest::html_nodes(content(website1), "table")
-  m49 <-rvest::html_table(tbls[[1]],
+  tbls <- html_nodes(content(website1), "table")
+  m49 <-html_table(tbls[[1]],
                    fill=F,
                    header = T)
 m49
