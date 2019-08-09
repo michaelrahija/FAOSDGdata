@@ -27,10 +27,17 @@ all_sdgs <- getDatasets(all = T)
 ```
 
 ## Access M49 codes
-There is dataset called m49 which is embedded in the package which provides the complete list of M49 countries, territories, regions, and codes. You can access with the following:
+There is a function which automatically scrapes the m49 countries and regions, with corresponding codes from the UNSD.
 
 ```r
+raw_m49 <- scrape_m49()
 
-head(m49)
+```
+
+## Harmonize M49 list with FAO adoptions, and column names with SDG template
+For analyzing SDG data downloaded using this package, it may be useful adopt the M49 datasets to include FAO special classifications, and harmonize column names with the SDG data template. 
+
+```r
+clean_m49 <- adopt_m49_for_FAO(raw_m49)
 
 ```
