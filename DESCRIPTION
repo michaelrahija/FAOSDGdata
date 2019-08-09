@@ -9,4 +9,10 @@ Description:
 License: MIT License
 Encoding: UTF-8
 LazyData: true
+Imports: dplyr,
+    httr,
+    readxl,
+    rvest,
+    stringr,
+    tidyselect
 RoxygenNote: 6.1.1
