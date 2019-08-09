@@ -6,7 +6,7 @@
 #' @return This function returns a dataframe containing the m49 classification
 #' exactly as scraped from the UNSD website.
 #'
-#' @importFrom httr GET
+#' @importFrom httr GET content
 #' @importFrom rvest html_nodes html_table
 #' @export
 
