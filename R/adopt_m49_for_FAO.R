@@ -39,6 +39,8 @@ adopt_m49_for_FAO <- function(raw_m49){
   )
   
   raw_m49$footnote = "unaltered M49"
+  
+ 
   #custom FAO classifications
   taiwan <- data.frame(
     globalcode = "1",
@@ -114,6 +116,9 @@ adopt_m49_for_FAO <- function(raw_m49){
     develop = NA,
     footnote  = "FAO descriptor as in NOCS. Code same as M49, but name changed."
   )
+  
+  raw_m49 <- raw_m49[raw_m49$areaname != "State of Palestine",]
+  
   
   m49 <- rbind(raw_m49,
                taiwan,
