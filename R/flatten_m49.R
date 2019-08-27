@@ -3,7 +3,7 @@
 #' This is function which takes as an input a dataframe containing data
 #' which contains the raw M49 data from scrape_m49, or adopted for FAO, and flattens
 #' it returning a dataframe with 3 columns containing the code, name, and level (region, 
-#' intermediate region, subregion, global, or area)
+#' intermediate region, subregion, global, or area). 
 #' 
 #' @param m49df is a data frame referring to raw m49, or fao adapted m49
 #'
@@ -12,7 +12,7 @@
 #' @importFrom dplyr select filter mutate
 #' @export
 #' 
-#' #create dataframe with unique area names and codes
+
 flatten_m49 <- function(m49df){
   
   regionclass <-
@@ -39,7 +39,9 @@ flatten_m49 <- function(m49df){
   
   flatm49 <- do.call("rbind", regionclasses)
   
+  flatm49 <- filter(flatm49, code != "")
+  
 
-flatm49  
+flatm49
 
 }

@@ -16,5 +16,5 @@ This function returns a dataframe containing the flattened m49 data frame
 This is function which takes as an input a dataframe containing data
 which contains the raw M49 data from scrape_m49, or adopted for FAO, and flattens
 it returning a dataframe with 3 columns containing the code, name, and level (region, 
-intermediate region, subregion, global, or area)
+intermediate region, subregion, global, or area).
 }
