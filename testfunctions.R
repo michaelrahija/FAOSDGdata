@@ -1,62 +1,44 @@
 #test functions
 library(dplyr)
 
+#--GET ALL DATASETS, CLEAN-UP COLUMN NAMES, AND MERGE
+allSdgs <- getDatasets(all = T)
+
+#keep only relevant columns, harmonize names, to merge into 1 df
+cleadSdgs <- lapply(allSdgs, cleanData)
+Sdgsdf<- do.call("rbind", cleadSdgs)
 
 
 
-x <- getDatasets(all = T)
+##--GET M49, adopt for FAO, and flatten
+geo <- scrape_m49() %>%
+          adopt_m49_for_FAO()
 
-xlist <- lapply(x, cleanData)
+flatm49 <- flatten_m49(geo)
 
-y <- do.call("rbind",xlist)
+#filter sdg dataset for only areas with valid m49 codes
+sdgs_validcodes <- filter(Sdgsdf, areacode %in% flatm49$code)
+sdgs_INvalidcodes <-  filter(Sdgsdf, !(areacode %in% flatm49$code))
+table(sdgs_INvalidcodes$areaname)
 
+#merge sdg dataset with m49 to create consistent area names
+flatm49 <- select(flatm49, -level)
 
+x <- merge(sdgs_validcodes,
+           flatm49,
+           by.x = "areacode",
+           by.y = "code",
+           all.x = T)
 
-source("R/getData.R")
+nrow(x) == nrow(ma_valid)
 
-sdgs <- c("2.1.1",
-          "2.1.2",
-          "2.3.1",
-          "2.3.2",
-          "2.5.1_Plants",
-          "2.5.1_Animals",
-          "2.5.2",
-          "2.a.1",
-          "2.c.1",
-          "6.4.1",
-          "6.4.2",
-          "14.4.1",
-          "14.6.1",
-          "14.7.1",
-          "14.b.1",
-          "15.1.1",
-          "15.2.1",
-          "15.4.2")
-          #"15.6.1") #18
+x$areaname <- x$name
 
-
-raw.data <- lapply(sdgs, function(x) getData(x, source = "web"))
-clean <- lapply(raw.data, cleanData)
-clean.df <- do.call("rbind", clean)
-
-
-#look at vars, remove value to skip tabulation
-test <- select(clean.df,-value)
-t <- sapply(test, table)
-
-#harmonize column names
-names(y) <- lapply(y, function(x) unique(x$Indicator))
-
-y <- lapply(y, cleanData)
-
-
-df <- do.call("bind_rows",y)
+sdgs_validnames <- select(x, -name)
 
 
 
-cols <- colnames(y$'2.1.1')
 
-y <- lapply(y, select(cols))
 
 #need to edit 2.5.1 name, a = plants, b = animals
 temp <- x[names(x) == '2.5.1']
@@ -89,7 +71,15 @@ rawSdgs <- getDatasets(all = T)
 allSdgs <- rawSdgs
 cleanall <- lapply(allSdgs, cleanData)
 sdgsdf <- do.call("rbind", cleanall)
-write.csv(sdgsdf, file = "~/Desktop/temp_raw_dataframe.csv", row.names = F)
+
+cleanSdgs <- sdgsdf
+
+
+unique(sdgsdf$areatype)
+regions <- filter(sdgsdf, grepl("Region", areatype))
+reg_sm <- regions %>%
+            group_by(areaname, indicator) %>%
+            summarize(n = n())
 
 ##need to clean country, and geo area names. 
 ##
