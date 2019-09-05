@@ -1,16 +1,19 @@
 #test functions
 library(dplyr)
+library(devtools)
+load_all()
+
 
 #--GET ALL DATASETS, CLEAN-UP COLUMN NAMES, AND MERGE
 allSdgs <- getDatasets(all = T)
 
-#keep only relevant columns, harmonize names, to merge into 1 df
+#keep only relevant columns, to merge into 1 df
 cleadSdgs <- lapply(allSdgs, cleanData)
 Sdgsdf<- do.call("rbind", cleadSdgs)
 
 
 
-##--GET M49, adopt for FAO, and flatten
+##--Harvest
 geo <- scrape_m49() %>%
           adopt_m49_for_FAO()
 
@@ -30,13 +33,19 @@ x <- merge(sdgs_validcodes,
            by.y = "code",
            all.x = T)
 
-nrow(x) == nrow(ma_valid)
+nrow(x) == nrow(sdgs_validcodes)
 
 x$areaname <- x$name
 
-sdgs_validnames <- select(x, -name)
+x <- select(x, -name)
 
+table(x$areaname)
 
+# Harmonize units of measure
+table(x$indicator,x$unit)
+x$unit <- harmonizeUnits(x$unit)
+
+table(x$unit)
 
 
 
