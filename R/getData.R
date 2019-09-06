@@ -1,4 +1,6 @@
 #' getData
+#' 
+#' 
 #' This is function which takes as an input an SDG indicator, and returns
 #' the latest dataset for that indicator as a dataframe. Pay attention to the naming of the
 #' SDG indicators in the default settings. 

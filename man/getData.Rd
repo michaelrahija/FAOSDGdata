@@ -2,10 +2,7 @@
 % Please edit documentation in R/getData.R
 \name{getData}
 \alias{getData}
-\title{getData
-This is function which takes as an input an SDG indicator, and returns
-the latest dataset for that indicator as a dataframe. Pay attention to the naming of the
-SDG indicators in the default settings.}
+\title{getData}
 \usage{
 getData(sdg = c("2.1.1", "2.1.2", "2.3.1", "2.3.2", "2.5.1_Plants",
   "2.5.1_Animals", "2.5.2", "2.a.1", "2.c.1", "6.4.1", "6.4.2", "14.4.1",
@@ -23,7 +20,6 @@ should always be up-to-date.}
 This function returns a tibble containing the latest published data
 }
 \description{
-getData
 This is function which takes as an input an SDG indicator, and returns
 the latest dataset for that indicator as a dataframe. Pay attention to the naming of the
 SDG indicators in the default settings.
