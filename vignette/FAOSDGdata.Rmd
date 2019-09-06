@@ -122,6 +122,7 @@ dirtyunits <- x %>%
 knitr::kable(dirtyunits, caption = "Before harmonizing")
 ````
 
+There are some NAs for units which correspond to NA values. They would be excluded when analyzed.
 ```{r }
 x$unit <- harmonizeUnits(x$unit)
 cleanunits <- x %>% 
@@ -134,3 +135,12 @@ knitr::kable(cleanunits, caption = "After harmonizing")
 
 ## Harmonizing/checking indicator names
 
+
+```{r }
+indicators <- x %>% 
+                group_by(indicator, indicatorDescription) %>%
+                summarize(N = n()) %>%
+                arrange(indicator)
+
+knitr::kable(indicators, caption = "Before harmonizing")
+````
