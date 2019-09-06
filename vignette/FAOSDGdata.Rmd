@@ -1,7 +1,7 @@
 ---
 title: "SDG Combining report"
 author: "Michael Rahija"
-date: "July 12, 2019"
+date: "September 6, 2019"
 output:
   html_document: default
   pdf_document: default
@@ -11,8 +11,10 @@ editor_options:
 
 # Report to combine datasets
 
-## Load package 
-```{r }
+The need for one clean, harmonizin
+
+## Set up
+```{r, warning = F, message = F }
 #set up
 knitr::opts_chunk$set(echo = T, warning=F, message = F)
 library(FAOSDGdata)
@@ -20,8 +22,9 @@ library(dplyr)
 
 ```
 
-### Download single dataset through API
+## Download single or multiple datasets and load as list(s)
 
+To get a singe datasets you can use the getData function. 
 ```{r }
 sdg <- getData("2.1.1", 
                source = "web")
@@ -29,105 +32,105 @@ sdg <- getData("2.1.1",
 head(sdg)
 ```
 
-### Download multiples SDG datasets
-
-```{r }
+To retrieve multiple datasets, you can use a vector of the corresponding SDG dataset numbers, 
+or to get all, you can set all = T.
+```{r, cache = T, wannings = F}
 allSdgs <- getDatasets(all = T)
 
-head(allSdgs)
+someSDGs <- getDatasets(c("2.1.1", "2.1.2"))
 
+head(someSDGs)
 ```
 
 
-### Clean single dataset to have easier column names, consistent classes, and only keep columns needed for analysis.
-```{r }
-cleandf <- getData("2.1.2", 
-                  source = "web") %>%
-           cleanData()
+## Merging multiple datasets into single dataframe
 
-head(cleandf)
-```
+Different technical units within FAO provide the SDG datasets, and the column names don't always match. Also, there are additional columns for some SDG indicators which are not applicable to others. Accordingly, cleanData subsets the datasets for only the columns which are present across and all SDG datasets. 
 
-### Get all dataset, clean them, merge into single datafarme
 ```{r }
 cleanall <- lapply(allSdgs, cleanData)
 
-sdgsdf <- do.call("rbind", cleanall)
+Sdgsdf <- do.call("rbind", cleanall)
 
-nrow(sdgsdf)
-head(sdgsdf)
-
+nrow(Sdgsdf)
 ```
 
 
-### Tabulate to check for consistent naming focusing on areacodes and names
+## Harmonizing SDG dataset(s) with M49
+
+The UNSD M49 standard is the geographic naming standard adopted by FAO for SDG data dissemination. However, this standard changes frequently, so scrape_m49 was written to scrape in real time the M49 standard from the UNSD website.
+
+**FAO has some slight deviations to the M49 standard which are applied with the function adopt_m49_FAO().**
+
+Also, to use the M49 to harmonize the names in the SDG dataset, it must be flattened so it can be merged. 
+
 ```{r }
-areas <- sdgsdf %>% 
-              group_by(areacode, areaname) %>% 
-              summarize(n = n()) %>% 
-              group_by(areacode) %>%
-              mutate(AreaCodeRepete = n()) %>%
-              arrange(areacode) %>%
-              as.data.frame()
+##--Harvest M49, and flatten for merger
+geo <- scrape_m49() %>%
+          adopt_m49_for_FAO()
 
+flatm49 <- flatten_m49(geo)
 
-areas$areaname <- substr(areas$areaname, start = 1, stop = 50)
-
-arrange(areas, areaname)
 ```
 
+Sometimes technical units within FAO submit data using geographic areas which may be relevant for their type of analysis, but not align directly with the FAO. Accordingly, those records are removed.  Below is a dataframe showing the records that were removed. 
 
-
-
-
-
-### Tabulate to check for units
 ```{r }
 
-sdgsdf %>% 
-      group_by(unit) %>% 
-      summarize(n = n())
+#filter sdg dataset for only areas with valid m49 codes
+sdgs_validcodes <- filter(Sdgsdf, areacode %in% flatm49$code)
+sdgs_INvalidcodes <-  filter(Sdgsdf, !(areacode %in% flatm49$code))
 
+invalid <- sdgs_INvalidcodes %>%
+                      group_by(areacode,areaname) %>%
+                      summarize(N = n())
+
+as.data.frame(invalid)
 ```
 
-# Create country data file
+After harmonizing names, the table below shows the total records for each geographic area. 
+
 ```{r }
+#merge sdg dataset with m49 to create consistent area names
+flatm49 <- select(flatm49, -level)
 
-#This dataset, already omiported and cleaned
-sdgsdf <- read.csv("~/Desktop/temp_raw_dataframe.csv", stringsAsFactors = F)
-cleanSdgs <- sdgsdf
-cr <- cleanSdgs
+x <- merge(sdgs_validcodes,
+           flatm49,
+           by.x = "areacode",
+           by.y = "code",
+           all.x = T)
 
-#remove observations without codes
-cr <- filter(cr, !is.na(areacode))
+#update areaname variable an drop
+x$areaname <- x$name
 
-cr_m <-  left_join(cr,
-                   m49, #internal dataframe
-                   by = c("areacode" = "Code"))
+x <- select(x, -name)
 
-
-
-#add 0s to codes for sdg dataset
-cr$areacode[str_length(cr$areacode) == 1] <- paste0("00", ... = cr$areacode[str_length(cr$areacode) == 1])
-cr$areacode[str_length(cr$areacode) == 2] <- paste0("0", cr$areacode[str_length(cr$areacode) == 2])
-
-cr <- filter(cleanSdgs, areatype == "2.4-Regional (M49)" |
-                        areatype == "" some say regional M49, others say Regional SDG
-                        areatype == "3.0-Country")
-
-#add 0s to codes for sdg dataset
-cr$areacode[str_length(cr$areacode) == 1] <- paste0("00", ... = cr$areacode[str_length(cr$areacode) == 1])
-cr$areacode[str_length(cr$areacode) == 2] <- paste0("0", cr$areacode[str_length(cr$areacode) == 2])
-  
-cr_m <-  left_join(cr,
-                   m49, #internal dataframe
-                   by = c("areacode" = "Code"))
-
-#drop whatever doesnt' match in m49
-cr_m <- filter(cr_m, !is.na(Name))
-
-
-#check geo names
-test <- cr_m %>% group_by(Name, areacode) %>% summarize(n = n())
-
+geotable <- x %>%
+              group_by(areaname) %>%
+              summarize(N = n())
+#check names
+knitr::kable(geotable)
 ```
+
+## Harmonizing units of measure
+The table below shows the units of measure used across all SDG datasets
+```{r }
+dirtyunits <- x %>% 
+                group_by(unit) %>%
+                summarize(N = n())
+
+knitr::kable(dirtyunits, caption = "Before harmonizing")
+````
+
+```{r }
+x$unit <- harmonizeUnits(x$unit)
+cleanunits <- x %>% 
+                group_by(unit) %>%
+                summarize(N = n())
+
+knitr::kable(cleanunits, caption = "After harmonizing")
+````
+
+
+## Harmonizing/checking indicator names
+
