@@ -186,7 +186,6 @@ summary {
 
 <div id="report-to-combine-datasets" class="section level1">
 <h1>Report to combine datasets</h1>
-<p>The need for one clean, harmonizin</p>
 <div id="set-up" class="section level2">
 <h2>Set up</h2>
 <pre class="r"><code>#set up
@@ -1866,6 +1865,174 @@ knitr::kable(indicators, caption = &quot;Before harmonizing&quot;)</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="harmonizingchecking-indicator-names-1" class="section level2">
+<h2>Harmonizing/checking indicator names</h2>
+<pre class="r"><code>indicators &lt;- x %&gt;% 
+                harmonizeIndicators() %&gt;%
+                group_by(indicator, indicatorDescription) %&gt;%
+                summarize(N = n()) %&gt;%
+                arrange(indicator)
+
+knitr::kable(indicators, caption = &quot;Before harmonizing&quot;)</code></pre>
+<table>
+<caption>Before harmonizing</caption>
+<thead>
+<tr class="header">
+<th align="left">indicator</th>
+<th align="left">indicatorDescription</th>
+<th align="right">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">14.4.1</td>
+<td align="left">Proportion of fish stocks within biologically sustainable levels (not overexploited), total (%)</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td align="left">14.6.1</td>
+<td align="left">Progress by countries in the degree of implementation of international instruments aiming to</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">combat illegal, unreport</td>
+<td align="left">ed and unregulated fishing 277</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">14.7.1</td>
+<td align="left">Sustainable fisheries as a percentage of GDP</td>
+<td align="right">4986</td>
+</tr>
+<tr class="odd">
+<td align="left">14.b.1</td>
+<td align="left">Degree of application of a legal/regulatory/policy/institutional framework which recognizes and</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">protects access rights f</td>
+<td align="left">or small-scale fisheries 277</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">15.1.1</td>
+<td align="left">Forest area as a proportion of total land area (%)</td>
+<td align="right">1108</td>
+</tr>
+<tr class="even">
+<td align="left">15.2.1 (1)</td>
+<td align="left">Forest area net change rate (%)</td>
+<td align="right">831</td>
+</tr>
+<tr class="odd">
+<td align="left">15.2.1 (2)</td>
+<td align="left">Above-ground biomass in forest, per hectare (tonnes/ha)</td>
+<td align="right">1108</td>
+</tr>
+<tr class="even">
+<td align="left">15.2.1 (3)</td>
+<td align="left">Proportion of forest area within legally established protected areas (%)</td>
+<td align="right">1108</td>
+</tr>
+<tr class="odd">
+<td align="left">15.2.1 (4)</td>
+<td align="left">Proportion of forest area with a long-term forest management plan (%)</td>
+<td align="right">831</td>
+</tr>
+<tr class="even">
+<td align="left">15.2.1 (5)</td>
+<td align="left">Forest area certified under an independently verified certification scheme (thousands of hectares)</td>
+<td align="right">1939</td>
+</tr>
+<tr class="odd">
+<td align="left">15.4.2</td>
+<td align="left">Mountain Green Cover Index</td>
+<td align="right">269</td>
+</tr>
+<tr class="even">
+<td align="left">2.1.1</td>
+<td align="left">Prevalence of undernourishment, total (%)</td>
+<td align="right">5016</td>
+</tr>
+<tr class="odd">
+<td align="left">2.1.1 (complementary)</td>
+<td align="left">Number of undernourished people (millions)</td>
+<td align="right">5016</td>
+</tr>
+<tr class="even">
+<td align="left">2.1.2</td>
+<td align="left">Prevalence of moderate or severe food insecurity, total with upper/lower bounds (%)</td>
+<td align="right">2679</td>
+</tr>
+<tr class="odd">
+<td align="left">2.1.2 (complementary)</td>
+<td align="left">Number of moderately or severely food insecure people, total with upper/lower bounds (thousands)</td>
+<td align="right">2679</td>
+</tr>
+<tr class="even">
+<td align="left">2.1.2 (complementary)</td>
+<td align="left">Number of severely food insecure people, total with upper/lower bounds (thousands)</td>
+<td align="right">2679</td>
+</tr>
+<tr class="odd">
+<td align="left">2.1.2 (complementary)</td>
+<td align="left">Prevalence of severe food insecurity, total with upper/lower bounds (%)</td>
+<td align="right">2679</td>
+</tr>
+<tr class="even">
+<td align="left">2.3.1</td>
+<td align="left">Productivity of small-scale food producers</td>
+<td align="right">2223</td>
+</tr>
+<tr class="odd">
+<td align="left">2.3.2</td>
+<td align="left">Average income of small-scale food producers, by sex and indigenous status</td>
+<td align="right">3211</td>
+</tr>
+<tr class="even">
+<td align="left">2.5.1 (animals)</td>
+<td align="left">Percentage of animal genetic resources for food and agriculture secured in either medium or long-term conservation facilities</td>
+<td align="right">550</td>
+</tr>
+<tr class="odd">
+<td align="left">2.5.1 (plants)</td>
+<td align="left">Plant genetic resources accessions stored ex situ (number)</td>
+<td align="right">2493</td>
+</tr>
+<tr class="even">
+<td align="left">2.5.2</td>
+<td align="left">Proportion of local breeds classified as being at risk of extinction</td>
+<td align="right">4940</td>
+</tr>
+<tr class="odd">
+<td align="left">2.5.2 (complementary)</td>
+<td align="left">Proportion of local breeds classified as being at risk, not-at-risk or at unknown level of risk of extinction</td>
+<td align="right">560</td>
+</tr>
+<tr class="even">
+<td align="left">2.a.1</td>
+<td align="left">Agriculture orientation index for government expenditures</td>
+<td align="right">4932</td>
+</tr>
+<tr class="odd">
+<td align="left">2.c.1</td>
+<td align="left">Indicator of Food Price Anomalies (IFPA), by type of product</td>
+<td align="right">2964</td>
+</tr>
+<tr class="even">
+<td align="left">6.4.1</td>
+<td align="left">Water Use Efficiency</td>
+<td align="right">1044</td>
+</tr>
+<tr class="odd">
+<td align="left">6.4.2</td>
+<td align="left">Level of water stress: freshwater withdrawal as a proportion of available freshwater resources (%)</td>
+<td align="right">1044</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>write.csv(x, file = &quot;temp_mergedSDG.csv&quot;, row.names = F)</code></pre>
 </div>
 </div>
 

@@ -11,7 +11,6 @@ editor_options:
 
 # Report to combine datasets
 
-The need for one clean, harmonizin
 
 ## Set up
 ```{r, warning = F, message = F }
@@ -143,4 +142,19 @@ indicators <- x %>%
                 arrange(indicator)
 
 knitr::kable(indicators, caption = "Before harmonizing")
+````
+
+## Harmonizing/checking indicator names
+
+
+```{r }
+indicators <- x %>% 
+                harmonizeIndicators() %>%
+                group_by(indicator, indicatorDescription) %>%
+                summarize(N = n()) %>%
+                arrange(indicator)
+
+knitr::kable(indicators, caption = "Before harmonizing")
+
+write.csv(x, file = "temp_mergedSDG.csv", row.names = F)
 ````
