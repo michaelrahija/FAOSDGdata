@@ -39,6 +39,12 @@ harmonizeIndicators <- function(sdgData){
     #2.5.2
     sdgData$indicator[sdgData$indicatorDescription == "Proportion of local breeds classified as being at risk, not-at-risk or at unknown level of risk of extinction"] <- "2.5.2 (complementary)" 
     
+    #2.1.2
+    sdgData$indicator[sdgData$indicatorDescription == "Number of moderately or severely food insecure people, total with upper/lower bounds (thousands)"] <- "2.1.2 (complementary)" 
+    sdgData$indicator[sdgData$indicatorDescription == "Number of severely food insecure people, total with upper/lower bounds (thousands)"] <- "2.1.2 (complementary)" 
+    sdgData$indicator[sdgData$indicatorDescription == "Prevalence of severe food insecurity, total with upper/lower bounds (%)"] <- "2.1.2 (complementary)" 
+    
+    
 sdgData  
   
 }
