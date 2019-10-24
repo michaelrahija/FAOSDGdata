@@ -15,6 +15,7 @@
 #' @importFrom readxl read_xls
 #' @export
 
+
 getData <- function(sdg = c("2.1.1",
                             "2.1.2",
                             "2.3.1",
@@ -32,15 +33,12 @@ getData <- function(sdg = c("2.1.1",
                             "15.1.1",
                             "15.2.1",
                             "15.4.2",
-                            "15.6.1"),
-                    source = c("web",'local')){
+                            "15.6.1")){
 
   #checks
   if(length(sdg) > 1) stop("Only one SDG indicator may be retrieved at a time")
 
-  #build uRL
   
-  if(source == "web"){
       #custom URL for 2.5.1 plants
       if(sdg == "2.5.1_Plants"){
         url <-"https://sdlc.fao.org/artifactory/list/fao-sdg-releases/2.5.1%20plants/2_5_1_Plants_DataExport_3_2019.xls" 
@@ -73,7 +71,7 @@ getData <- function(sdg = c("2.1.1",
         url <- paste0(base_url, mid_url,end_url)
         
       }
-  }
+  
     
   #download SDG file
   dl_file <- tempfile(fileext = ".xls")
@@ -90,24 +88,6 @@ getData <- function(sdg = c("2.1.1",
   version <-readxl::read_xls(dl_file,
                              sheet = "version")
 
-  if(source == "local") {
-    
-    stop("local file not configured yet")
-    # files.full <- list.files("data/", full.names = T)
-    # sdg.name <- gsub(pattern = "\\.",
-    #                  replacement = "_",
-    #                  sdg)
-    # 
-    # file.to.read <- files.full[grep(sdg.name,files.full)]
-    # 
-    # df <- readxl::read_xls(file.to.read, 
-    #                        sheet = "data")
-    # 
-    # version <-readxl::read_xls(file.to.read,
-    #                            sheet = "version")
-    #                        
-  }
-  
   
   #add version column
   version <- colnames(version)[1]
@@ -116,5 +96,6 @@ getData <- function(sdg = c("2.1.1",
 df
 
 }
+
 
 
