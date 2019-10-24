@@ -51,7 +51,10 @@ getData <- function(sdg = c("2.1.1",
       } else if (sdg == "14.7.1"){
         url <- "https://sdlc.fao.org/artifactory/list/fao-sdg-releases/14.7.1/14_7_1_DataExport_7_2019.xls"
         
-      } else if (sdg %in% c("6.4.1", "6.4.2")){
+      } else if (sdg == "2.a.1"){
+        url <- "http://sdlc.fao.org/artifactory/fao-sdg-releases/2.a.1/2_a_1_DataExport_10_2019.xls"
+        
+      }else if (sdg %in% c("6.4.1", "6.4.2")){
         base_url <- sprintf("https://sdlc.fao.org/artifactory/list/fao-sdg-releases/%s/", sdg)
         mid_url <- gsub("\\.", "_", sdg)
         end_url <- paste0("_","DataExport_6_2019.xls")
