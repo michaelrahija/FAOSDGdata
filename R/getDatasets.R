@@ -39,7 +39,7 @@ getDatasets <- function(sdg_codes,
   
   
   if(all == T){
-    result <- lapply(sdgs, function(x) getData(x, source = "web"))
+    result <- lapply(sdgs, function(x) getData(x))
     
   } else {
     
@@ -48,7 +48,7 @@ getDatasets <- function(sdg_codes,
       stop("Input contains invalid SDG codes. Please check")
       
     } else {
-      result <- lapply(sdg_codes, function(x) getData(x, source = "web"))
+      result <- lapply(sdg_codes, function(x) getData(x))
     }
     
   }
