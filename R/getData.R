@@ -83,7 +83,8 @@ getData <- function(sdg = c("2.1.1",
       
   #extract dataset, and version
   df <- readxl::read_xls(dl_file,
-                         sheet = "data")
+                         sheet = "data",
+                         col_types = "text")
       
   version <-readxl::read_xls(dl_file,
                              sheet = "version")
