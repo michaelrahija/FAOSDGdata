@@ -25,8 +25,7 @@ library(dplyr)
 
 To get a singe datasets you can use the getData function. 
 ```{r }
-sdg <- getData("2.1.1", 
-               source = "web")
+sdg <- getData("2.1.1")
 
 head(sdg)
 ```
@@ -156,5 +155,25 @@ indicators <- x %>%
 
 knitr::kable(indicators, caption = "Before harmonizing")
 
+x <- harmonizeIndicators(x)
 write.csv(x, file = "temp_mergedSDG.csv", row.names = F)
+````
+
+## Reviewing how much data for each indicator
+
+
+```{r }
+null.values = c("NA", "N", "Not validated")
+y <- x %>% 
+  filter(areatype == "3.0-Country") %>%
+  group_by(indicator, indicatorDescription) %>%
+  mutate(Valid = !(value %in% null.values)) %>%
+  filter(Valid == TRUE) %>%
+  summarize(Countries = length(unique(areaname)),
+            Valid = n(),
+            Years = length(unique(timeperiod)))
+
+y <- arrange(y, indicator)
+write.csv(y, file = "temp_summary_available_data.csv", row.names = F)
+knitr::kable(y)              
 ````
