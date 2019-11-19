@@ -13,6 +13,11 @@
 
 cleanData <- function(sdgdf){
   
+  #filter SDG 2.1.2 for mid bounds
+  if("2.1.2" %in% unique(sdgdf$Indicator)){
+    sdgdf <- filter(sdgdf, Bounds == "Mid-point")
+  }
+  
   #select relevant columns, and provide simple names
   relcols <- c("GeoAreaCode",
                "GeoAreaName",
