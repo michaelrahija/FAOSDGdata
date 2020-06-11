@@ -1,5 +1,5 @@
 # FAOSDG Data
-
+## THIS PACKAGE IS NO LONGER MAINTAINED, AND THE SDG DATASETS ARE OLD DATASETS. ANYONE IS FREE TO TAKE OVER THIS REPOSITORY AND UPDATE ##
 ## Overview
 This package provides functions to download and interact with the latest published SDG datasets from FAO. It is currently underdevelopment.
 
